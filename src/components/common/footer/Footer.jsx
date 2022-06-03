@@ -10,7 +10,6 @@ const Footer = () => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '95vh',
             }}
         >
             <Box
@@ -27,11 +26,11 @@ const Footer = () => {
             >
                 <Container maxWidth="sm">
                     <Typography variant="body1">
-                        My sticky footer can be found here.
+                        One of the trusted telemedicine service
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {'Copyright © '}
-                        <Link color="inherit" href="https://mui.com/">
+                        <Link color="inherit" href="/">
                             JoruriDoctor
                         </Link>{' '}
                         {new Date().getFullYear()}
