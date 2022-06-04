@@ -5,6 +5,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import Carousel from "react-material-ui-carousel";
+import { Link, Link as RouterLink } from 'react-router-dom';
 import Hero1 from "../../../assets/images/Doctor1.jpg";
 import { items } from "../../DemoData/HomeData";
 
@@ -62,6 +63,8 @@ const HomeCarousel = () => {
                 variant="outlined"
                 size="large"
                 color="inherit"
+                component={RouterLink}
+                to="/signin"
                 sx={{
                   width: 300,
                   fontWeight: "bold",
@@ -72,7 +75,7 @@ const HomeCarousel = () => {
                   },
                 }}
               >
-                MAKE AN APPOINTMENT!
+                <Link to="/signin">MAKE AN APPOINTMENT!</Link>
               </Button>
             </Stack>
           </Box>
