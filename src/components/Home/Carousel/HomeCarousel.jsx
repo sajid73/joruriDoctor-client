@@ -6,7 +6,7 @@ import {
 import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Link, Link as RouterLink } from 'react-router-dom';
-import Hero1 from "../../../assets/images/Doctor1.jpg";
+import Hero1 from "../../../assets/images/Doctor2.jpg";
 import { items } from "../../DemoData/HomeData";
 
 const HomeCarousel = () => {
@@ -17,7 +17,7 @@ const HomeCarousel = () => {
           <Box
             key={i}
             sx={{
-              height: { xs: "50vh", md: "85vh" },
+              height: { xs: "50vh", md: "90vh" },
               display: "flex",
               alignItems: `${item.align}`,
               flexDirection: "column",
