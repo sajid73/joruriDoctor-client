@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Carousel from "../components/Home/Carousel/Carousel";
+import HomeCarousel from "../components/Home/Carousel/HomeCarousel";
 import Services from "../components/Home/Services/Services";
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <div>
-      <Carousel />
+      <HomeCarousel />
       <Services />
     </div>
   );
