@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const pages = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "About", link: "/about" },
@@ -18,6 +18,8 @@ const pages = [
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [color, setColor] = useState('#00D6A3');
+  const [navColor, setNavColor] = useState("hsla(0, 0%, 80.3%, 0.1)");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -27,14 +29,34 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
+  const changeNavbarColor = () => {
+    if (window.scrollY >= 50) {
+      setNavColor("#033b4a");
+    }
+    else {
+      setNavColor("hsla(0, 0%, 80.3%, 0.1)");
+    }
+  };
+  window.addEventListener('scroll', changeNavbarColor);
+
+  const location = useLocation();
+  React.useEffect(() => {
+    if (location.pathname === '/') {
+      setColor('white');
+      setNavColor("hsla(0, 0%, 80.3%, 0.1)");
+    } else {
+      setColor('#00D6A3');
+      setNavColor("#033b4a");
+    }
+  }, [location])
+
   return (
     <AppBar
       position="fixed"
       color="transparent"
       sx={{
         backdropFilter: `blur(4px)`,
-        backgroundColor: "hsla(0, 0%, 80.3%, 0.1)",
-        color: "white"
+        backgroundColor: navColor,
       }}
     >
       <Container maxWidth="xl">
@@ -42,8 +64,9 @@ const Header = () => {
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ mr: 5, ml: 5, display: { md: "flex" } }}
+            component={Link}
+            to="/"
+            sx={{ display: { md: "flex" }, mt: { xs: 2, md: 0 }, ml: { xs: 2, md: 0 } }}
           >
             <img
               src={require("../../../assets/images/joruriDoctor02.png")}
@@ -65,7 +88,7 @@ const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              // color="inherit"
+            // color="inherit"
             >
               <MenuIcon />
             </IconButton>
@@ -89,9 +112,24 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.link} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.name}</Typography>
+                  <Typography component={Link} to={page.link} textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem
+                component={Link} to='/signin'
+                onClick={handleCloseNavMenu}
+                sx={{
+                  backgroundColor: "#00D6A3",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    color: "black",
+                    backgroundColor: "white",
+                  },
+                }}
+              >
+                Sign in
+              </MenuItem>
             </Menu>
           </Box>
 
@@ -108,7 +146,7 @@ const Header = () => {
                 <Button
                   sx={{
                     fontWeight: "bold",
-                    color: "white",
+                    color: color,
                     fontSize: 15,
                     "&:after": {
                       content: '""',
@@ -117,7 +155,7 @@ const Header = () => {
                       left: "10%",
                       bottom: 0,
                       width: 0,
-                      backgroundColor: "white",
+                      backgroundColor: color,
                       transition: "all ease-in-out .2s",
                     },
                     "&:hover": {
@@ -133,9 +171,9 @@ const Header = () => {
                 </Button>
               </Link>
             ))}
-          </Box>
-          <Link to="/signin">
             <Button
+              component={Link}
+              to="/signin"
               sx={{
                 mx: 3,
                 display: "block",
@@ -150,7 +188,7 @@ const Header = () => {
             >
               Sign in
             </Button>
-          </Link>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

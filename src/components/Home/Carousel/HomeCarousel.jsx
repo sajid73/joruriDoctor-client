@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-import { Link, Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Hero1 from "../../../assets/images/Doctor2.jpg";
 import { items } from "../../DemoData/HomeData";
 
@@ -75,7 +75,7 @@ const HomeCarousel = () => {
                   },
                 }}
               >
-                <Link to="/signin">MAKE AN APPOINTMENT!</Link>
+                MAKE AN APPOINTMENT!
               </Button>
             </Stack>
           </Box>
