@@ -1,9 +1,10 @@
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+// import * as Muicon from "@material-ui/icons";
 import { Paper, Stack, Typography } from "@mui/material";
 
 const StepCard = ({ data }) => {
   return (
-    <Stack direction="row" spacing={6}>
+    <Stack direction="row" spacing={8} alignItems="center">
       <Typography
         sx={{
           display: {
@@ -13,16 +14,17 @@ const StepCard = ({ data }) => {
           width: "120px",
         }}
         variant="h1"
+        align="center"
       >
         {data.id}
       </Typography>
-      <Paper>
+      <Paper sx={{ textAlign: "center", width: "240px", height: "90px" }}>
         <PersonSearchIcon />
       </Paper>
       <Typography variant="h6">
         <b>{data.title}</b>
         <br />
-        {data.desc}
+        <Typography variant="body1">{data.desc}</Typography>
       </Typography>
     </Stack>
   );
