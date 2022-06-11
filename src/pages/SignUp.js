@@ -5,20 +5,27 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { React, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signUpUser } from "../api";
 
 const SignUp = () => {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("submitting form");
     const data = new FormData(event.currentTarget);
-    console.log({
+    const name = data.get("firstName") + " " + data.get("lastName");
+    const obj = {
       email: data.get("email"),
       password: data.get("password"),
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-    });
+      name,
+    };
+    const res = await signUpUser(obj);
+    if (res.status === 201) {
+      navigate(from);
+    }
   };
 
   useEffect(() => {

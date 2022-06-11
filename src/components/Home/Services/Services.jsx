@@ -10,7 +10,6 @@ const Services = () => {
     <Container
       sx={{
         display: "flex",
-        justifyContent: "space-around",
         flexWrap: "wrap",
         marginTop: "-10rem",
         position: "relative",
