@@ -7,20 +7,26 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signInUser } from "../api";
 
 const SignIn = () => {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("submitting form");
     const data = new FormData(event.currentTarget);
-    console.log({
+
+    const res = await signInUser({
       email: data.get("email"),
       password: data.get("password"),
-      remember: data.get("remember"),
     });
+    if (res.status === 201) {
+      navigate(from);
+    }
   };
   useEffect(() => {
     document.title = "Sign In - Joruri Doctor";

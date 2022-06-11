@@ -1,5 +1,4 @@
 import { Container, Stack } from "@mui/material";
-import React from "react";
 import step from "../../../assets/svg/Steps.svg";
 import { stepsData } from "../../DemoData/HomeData";
 import StepCard from "./StepCard";
@@ -11,7 +10,7 @@ const Steps = () => {
         <img src={step} width={385} height={610} alt="Steps" />
         <Stack direction="column" spacing={3}>
           {stepsData.map((step) => (
-            <StepCard data={step} />
+            <StepCard key={step.id} data={step} />
           ))}
         </Stack>
       </Stack>

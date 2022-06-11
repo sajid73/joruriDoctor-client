@@ -8,15 +8,16 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { AppContext } from "../../../states/app.context";
 const pages = [
   { id: 1, name: "Home", link: "/" },
   { id: 2, name: "About", link: "/about" },
 ];
 
 const Header = () => {
+  const { user } = useContext(AppContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [color, setColor] = useState('#00D6A3');
   const [navColor, setNavColor] = useState("hsla(0, 0%, 80.3%, 0.1)");
@@ -40,7 +41,7 @@ const Header = () => {
   window.addEventListener('scroll', changeNavbarColor);
 
   const location = useLocation();
-  React.useEffect(() => {
+  useEffect(() => {
     if (location.pathname === '/') {
       setColor('white');
       setNavColor("hsla(0, 0%, 80.3%, 0.1)");
@@ -48,7 +49,7 @@ const Header = () => {
       setColor('#00D6A3');
       setNavColor("#033b4a");
     }
-  }, [location])
+  }, [location, user])
 
   return (
     <AppBar
@@ -115,21 +116,23 @@ const Header = () => {
                   <Typography component={Link} to={page.link} textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
-              <MenuItem
-                component={Link} to='/signin'
-                onClick={handleCloseNavMenu}
-                sx={{
-                  backgroundColor: "#00D6A3",
-                  color: "white",
-                  fontWeight: "bold",
-                  "&:hover": {
-                    color: "black",
-                    backgroundColor: "white",
-                  },
-                }}
-              >
-                Sign in
-              </MenuItem>
+              {
+                user.name ? user.name : <MenuItem
+                  component={Link} to='/signin'
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    backgroundColor: "#00D6A3",
+                    color: "white",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      color: "black",
+                      backgroundColor: "white",
+                    },
+                  }}
+                >
+                  Sign in
+                </MenuItem>
+              }
             </Menu>
           </Box>
 
@@ -171,23 +174,35 @@ const Header = () => {
                 </Button>
               </Link>
             ))}
-            <Button
-              component={Link}
-              to="/signin"
-              sx={{
+            {
+              user.name ? <Button sx={{
                 mx: 3,
                 display: "block",
-                backgroundColor: "#00D6A3",
+                backgroundColor: "black",
                 color: "white",
-                fontWeight: "bold",
+                fontWeight: "bolder",
                 "&:hover": {
                   color: "black",
                   backgroundColor: "white",
                 },
-              }}
-            >
-              Sign in
-            </Button>
+              }}>{user.name}</Button> : <Button
+                component={Link}
+                to="/signin"
+                sx={{
+                  mx: 3,
+                  display: "block",
+                  backgroundColor: "#00D6A3",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    color: "black",
+                    backgroundColor: "white",
+                  },
+                }}
+              >
+                Sign in
+              </Button>
+            }
           </Box>
         </Toolbar>
       </Container>

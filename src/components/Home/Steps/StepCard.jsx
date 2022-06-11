@@ -1,9 +1,7 @@
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { Paper, Stack, Typography } from "@mui/material";
-import React from "react";
 
 const StepCard = ({ data }) => {
-  console.log(data);
   return (
     <Stack direction="row" spacing={6}>
       <Typography
