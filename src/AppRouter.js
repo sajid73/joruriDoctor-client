@@ -1,6 +1,8 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/common/NotFound/NotFound";
+import Profile from "./components/dashboard/Profile";
+import VideoCall from "./components/dashboard/VideoCall";
+import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
@@ -15,6 +17,10 @@ const AppRouter = () => {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="videocall" element={<VideoCall />} />
+        </Route>
       </Routes>
     </div>
   );
