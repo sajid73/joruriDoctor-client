@@ -1,9 +1,8 @@
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Paper, Stack, Typography } from "@mui/material";
 
 const StepCard = ({ data }) => {
-
   return (
     <Stack direction="row" spacing={8} alignItems="center">
       <Typography
@@ -22,17 +21,27 @@ const StepCard = ({ data }) => {
       <Paper
         sx={{
           display: "flex",
-          justifyContent:"space-around",
+          justifyContent: "space-around",
           alignItems: "center",
           width: "280px",
           height: "120px",
         }}
       >
-        <FontAwesomeIcon
-          icon={solid('magnifying-glass')}
-          size="3x"
-          color="red"
-        />
+        {
+          data.icon === 'glass' ? (<FontAwesomeIcon
+            icon={solid('magnifying-glass')}
+            size="3x"
+            color='#00D6A3'
+          />) : data.icon === 'video' ? (<FontAwesomeIcon
+            icon={solid('video')}
+            size="3x"
+            color='#00D6A3'
+          />) : (<FontAwesomeIcon
+            icon={solid('file-prescription')}
+            size="3x"
+            color='#00D6A3'
+          />)
+        }
       </Paper>
       <Typography variant="h6">
         <b>{data.title}</b>

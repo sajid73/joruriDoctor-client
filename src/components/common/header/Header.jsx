@@ -35,7 +35,12 @@ const Header = () => {
       setNavColor("#033b4a");
     }
     else {
-      setNavColor("hsla(0, 0%, 80.3%, 0.1)");
+      if (location.pathname === '/') {
+        setNavColor("hsla(0, 0%, 80.3%, 0.1)");
+      } else {
+        setColor('#00D6A3');
+        setNavColor("#033b4a");
+      }
     }
   };
   window.addEventListener('scroll', changeNavbarColor);
@@ -175,31 +180,33 @@ const Header = () => {
               </Link>
             ))}
             {
-              user.name ? <Button sx={{
-                mx: 3,
-                display: "block",
-                backgroundColor: "black",
-                color: "white",
-                fontWeight: "bolder",
-                "&:hover": {
-                  color: "black",
-                  backgroundColor: "white",
-                },
-              }}>{user.name}</Button> : <Button
+              user.name ? <Button
                 component={Link}
-                to="/signin"
-                sx={{
+                to="dashboard" sx={{
                   mx: 3,
                   display: "block",
-                  backgroundColor: "#00D6A3",
-                  color: "white",
+                  backgroundColor: "black",
+                  color: "#00D6A3",
                   fontWeight: "bold",
                   "&:hover": {
                     color: "black",
                     backgroundColor: "white",
                   },
-                }}
-              >
+                }}>{user.name}</Button> : <Button
+                  component={Link}
+                  to="/signin"
+                  sx={{
+                    mx: 3,
+                    display: "block",
+                    backgroundColor: "#00D6A3",
+                    color: "white",
+                    fontWeight: "bold",
+                    "&:hover": {
+                      color: "black",
+                      backgroundColor: "white",
+                    },
+                  }}
+                >
                 Sign in
               </Button>
             }

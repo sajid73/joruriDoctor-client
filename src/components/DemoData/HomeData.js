@@ -25,18 +25,18 @@ export const stepsData = [
     id: 1,
     title: "Search your doctor",
     desc: "Search your doctor by specialty or doctor name. Choose the right doctor for you by viewing their profile, rating & experience.",
-    icon: 'magnifying-glass'
+    icon: 'glass'
   },
   {
     id: 2,
     title: "Consult live on VideoCall",
     desc: "Once you pay the required doctor fee, you will be joined to the queue. Doctor will make a secured video call to do the consultation.",
-    icon: 'magnifying-glass'
+    icon: 'video'
   },
   {
     id: 3,
     title: "Instant Prescription",
     desc: "Once the video consultation is complete, the doctor will upload the prescription. You can download the prescription immediately or later.",
-    icon: 'magnifying-glass'
+    icon: 'prescription'
   },
 ];
