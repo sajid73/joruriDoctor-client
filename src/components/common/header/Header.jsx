@@ -53,7 +53,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position="fixed"
+      position="sticky"
       color="transparent"
       sx={{
         backdropFilter: `blur(4px)`,
