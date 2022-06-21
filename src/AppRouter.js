@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/common/NotFound/NotFound";
 import About from "./pages/About";
@@ -8,7 +7,7 @@ import SignUp from "./pages/SignUp";
 
 const AppRouter = () => {
   return (
-    <div style={{paddingTop: '5rem',minHeight: '87vh'}}>
+    <div sx={{ paddingTop: "5rem", minHeight: "87vh" }}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
