@@ -1,14 +1,35 @@
+import { Box, Container } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet } from "react-router-dom";
 import DashDrawer from "./DashDrawer";
 
+const mdTheme = createTheme();
+
 const Dashboard = () => {
   return (
-    <div>
-      <DashDrawer />
-      <main>
-        <Outlet />
-      </main>
-    </div>
+    <ThemeProvider theme={mdTheme}>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <DashDrawer  />
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light"
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: "100vh",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Outlet />
+          </Container>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
 
