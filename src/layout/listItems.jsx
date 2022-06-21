@@ -1,20 +1,22 @@
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import LayersIcon from '@mui/icons-material/Layers';
-import PeopleIcon from '@mui/icons-material/People';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import VideoCallIcon from '@mui/icons-material/VideoCall';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 const logout = () => {
     localStorage.clear();
+    window.location.reload();
 }
 
 export const mainListItems = (
-    <React.Fragment>
+    <>
         <ListItemButton component={Link} to="">
             <ListItemIcon>
                 <DashboardIcon />
@@ -23,15 +25,27 @@ export const mainListItems = (
         </ListItemButton>
         <ListItemButton component={Link} to="profile">
             <ListItemIcon>
-                <ShoppingCartIcon />
+                <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton component={Link} to="videocall">
             <ListItemIcon>
-                <PeopleIcon />
+                <VideoCallIcon />
             </ListItemIcon>
-            <ListItemText primary="Customers" />
+            <ListItemText primary="Appointment" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="addadmin">
+            <ListItemIcon>
+                <SupervisorAccountIcon />
+            </ListItemIcon>
+            <ListItemText primary="Add Admin" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="adddoc">
+            <ListItemIcon>
+                <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Add Doctor" />
         </ListItemButton>
         <ListItemButton>
             <ListItemIcon>
@@ -41,9 +55,9 @@ export const mainListItems = (
         </ListItemButton>
         <ListItemButton onClick={logout} component={Link} to="/">
             <ListItemIcon>
-                <LayersIcon />
+                <ExitToAppIcon />
             </ListItemIcon>
             <ListItemText primary="Sign Out" />
         </ListItemButton>
-    </React.Fragment>
+    </>
 );
