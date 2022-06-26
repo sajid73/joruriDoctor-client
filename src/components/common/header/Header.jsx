@@ -1,11 +1,9 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useState } from "react";
@@ -19,7 +17,7 @@ const pages = [
 const Header = () => {
   const { user } = useContext(AppContext);
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [color, setColor] = useState('#00D6A3');
+  const [color, setColor] = useState("#00D6A3");
   const [navColor, setNavColor] = useState("hsla(0, 0%, 80.3%, 0.1)");
 
   const handleOpenNavMenu = (event) => {
@@ -33,28 +31,27 @@ const Header = () => {
   const changeNavbarColor = () => {
     if (window.scrollY >= 50) {
       setNavColor("#033b4a");
-    }
-    else {
-      if (location.pathname === '/') {
+    } else {
+      if (location.pathname === "/") {
         setNavColor("hsla(0, 0%, 80.3%, 0.1)");
       } else {
-        setColor('#00D6A3');
+        setColor("#00D6A3");
         setNavColor("#033b4a");
       }
     }
   };
-  window.addEventListener('scroll', changeNavbarColor);
+  window.addEventListener("scroll", changeNavbarColor);
 
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname === '/') {
-      setColor('white');
+    if (location.pathname === "/") {
+      setColor("white");
       setNavColor("hsla(0, 0%, 80.3%, 0.1)");
     } else {
-      setColor('#00D6A3');
+      setColor("#00D6A3");
       setNavColor("#033b4a");
     }
-  }, [location, user])
+  }, [location, user]);
 
   return (
     <AppBar
@@ -72,7 +69,11 @@ const Header = () => {
             noWrap
             component={Link}
             to="/"
-            sx={{ display: { md: "flex" }, mt: { xs: 2, md: 0 }, ml: { xs: 2, md: 0 } }}
+            sx={{
+              display: { md: "flex" },
+              mt: { xs: 2, md: 0 },
+              ml: { xs: 2, md: 0 },
+            }}
           >
             <img
               src={require("../../../assets/images/joruriDoctor02.png")}
@@ -94,7 +95,7 @@ const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-            // color="inherit"
+              // color="inherit"
             >
               <MenuIcon />
             </IconButton>
@@ -118,12 +119,21 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page.link} onClick={handleCloseNavMenu}>
-                  <Typography component={Link} to={page.link} textAlign="center">{page.name}</Typography>
+                  <Typography
+                    component={Link}
+                    to={page.link}
+                    textAlign="center"
+                  >
+                    {page.name}
+                  </Typography>
                 </MenuItem>
               ))}
-              {
-                user.name ? user.name : <MenuItem
-                  component={Link} to='/signin'
+              {user.name ? (
+                user.name
+              ) : (
+                <MenuItem
+                  component={Link}
+                  to="/signin"
                   onClick={handleCloseNavMenu}
                   sx={{
                     backgroundColor: "#00D6A3",
@@ -137,7 +147,7 @@ const Header = () => {
                 >
                   Sign in
                 </MenuItem>
-              }
+              )}
             </Menu>
           </Box>
 
@@ -179,10 +189,11 @@ const Header = () => {
                 </Button>
               </Link>
             ))}
-            {
-              user.name ? <Button
+            {user.name ? (
+              <Button
                 component={Link}
-                to="dashboard" sx={{
+                to="dashboard"
+                sx={{
                   mx: 3,
                   display: "block",
                   backgroundColor: "black",
@@ -192,24 +203,29 @@ const Header = () => {
                     color: "black",
                     backgroundColor: "white",
                   },
-                }}>{user.name}</Button> : <Button
-                  component={Link}
-                  to="/signin"
-                  sx={{
-                    mx: 3,
-                    display: "block",
-                    backgroundColor: "#00D6A3",
-                    color: "white",
-                    fontWeight: "bold",
-                    "&:hover": {
-                      color: "black",
-                      backgroundColor: "white",
-                    },
-                  }}
-                >
+                }}
+              >
+                {user.name}
+              </Button>
+            ) : (
+              <Button
+                component={Link}
+                to="/signin"
+                sx={{
+                  mx: 3,
+                  display: "block",
+                  backgroundColor: "#00D6A3",
+                  color: "white",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    color: "black",
+                    backgroundColor: "white",
+                  },
+                }}
+              >
                 Sign in
               </Button>
-            }
+            )}
           </Box>
         </Toolbar>
       </Container>

@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/common/NotFound/NotFound";
+import ProfileLayout from "./components/common/Profile/ProfileLayout";
 import AddAdmin from "./components/dashboard/admin/AddAdmin";
 import AddDoc from "./components/dashboard/admin/AddDoc";
-import Profile from "./components/dashboard/Profile";
+import EditProfile from "./components/dashboard/ProfileLayout/EditProfile";
 import VideoCall from "./components/dashboard/VideoCall";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
@@ -18,10 +19,10 @@ const AppRouter = () => {
         <Route path="about" element={<About />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="test" element={<ProfileLayout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="dashboard" element={<Dashboard />}>
-          <Route index element={<Profile />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<EditProfile />} />
           <Route path="videocall" element={<VideoCall />} />
           <Route path="adddoc" element={<AddDoc />} />
           <Route path="addadmin" element={<AddAdmin />} />
