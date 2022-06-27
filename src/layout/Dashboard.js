@@ -1,17 +1,27 @@
 import { Box, Container } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Outlet } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { AppContext } from "../states/app.context";
 import DashDrawer from "./DashDrawer";
 
 const mdTheme = createTheme();
 
 const Dashboard = () => {
+  const { user } = useContext(AppContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <DashDrawer  />
+        <DashDrawer />
         <Box
           component="main"
           sx={{

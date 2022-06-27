@@ -1,5 +1,4 @@
 import { Container } from "@mui/system";
-import React from "react";
 import car from "../../../assets/images/services/car.png";
 import clock from "../../../assets/images/services/clock.png";
 import team from "../../../assets/images/services/medical-team.png";

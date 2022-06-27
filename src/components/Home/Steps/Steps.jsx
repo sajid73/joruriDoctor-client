@@ -14,8 +14,11 @@ const Steps = () => {
         <br /> You can join the online queue immediately, while you can continue
         doing other tasks at home or office.
       </Typography>
-      <Stack direction="row" spacing={5}>
-        <img src={step} width={385} height={610} alt="Steps" />
+      <Stack sx={{ flexDirection: { sm: 'col', lg: 'row' } }} spacing={5}>
+        {/* <img src={step} width={385} height={610} alt="Steps" /> */}
+        <Container maxWidth="xs">
+          <img src={step} width="100%" alt="Steps" />
+        </Container>
         <Stack direction="column" spacing={8} justifyContent="center">
           {stepsData.map((step) => (
             <StepCard key={step.id} data={step} />
