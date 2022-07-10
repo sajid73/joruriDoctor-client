@@ -11,6 +11,7 @@ import {
   FormLabel,
   Grid,
   IconButton,
+  Input,
   InputLabel,
   MenuItem,
   Radio,
@@ -37,22 +38,31 @@ const ProfileDetails = () => {
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeContent={
-                  <IconButton
-                    aria-label="delete"
-                    size="small"
-                    sx={{
-                      border: "solid",
-                      bgcolor: "#00D6A3",
-                      color: "white",
-                      "&:hover": {
+                  <label htmlFor="icon-button-file">
+                    <Input
+                      accept="image/*"
+                      id="icon-button-file"
+                      type="file"
+                      sx={{ display: "none" }}
+                    />
+                    <IconButton
+                      type="file"
+                      size="small"
+                      component="span"
+                      sx={{
+                        border: "solid",
+                        bgcolor: "#00D6A3",
                         color: "white",
-                        bgcolor: "#033b4a",
-                        borderColor: "#033b4a",
-                      },
-                    }}
-                  >
-                    <EditIcon fontSize="inherit" />
-                  </IconButton>
+                        "&:hover": {
+                          color: "white",
+                          bgcolor: "#033b4a",
+                          borderColor: "#033b4a",
+                        },
+                      }}
+                    >
+                      <EditIcon fontSize="inherit" />
+                    </IconButton>
+                  </label>
                 }
               >
                 <Avatar alt="Profile Picture" sx={{ width: 100, height: 100 }}>
