@@ -23,6 +23,7 @@ const StepCard = ({ data }) => {
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
+          padding: "1rem",
           width: "280px",
           height: "120px",
         }}

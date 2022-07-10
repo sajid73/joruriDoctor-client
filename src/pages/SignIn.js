@@ -30,6 +30,7 @@ const SignIn = () => {
       email: data.get("email"),
       password: data.get("password"),
     });
+    console.log(res)
     if (res.status === 201) {
       setUser(res.data.user);
       navigate(from);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import HomeCarousel from "../components/Home/Carousel/HomeCarousel";
 import Intro from "../components/Home/Introduction/Intro";
 import Services from "../components/Home/Services/Services";
