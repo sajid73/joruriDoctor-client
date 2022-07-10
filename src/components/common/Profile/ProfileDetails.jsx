@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   Box,
+  Button,
   CircularProgress,
   Container,
   FormControl,
@@ -27,11 +28,20 @@ import { speci } from "../../DemoData/HomeData";
 const ProfileDetails = () => {
   const { user } = useContext(AppContext);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const data = new FormData(e.currentTarget);
+    // const obj = {
+    //   email: data.get("email"),
+    //   password: data.get("password")
+    // }
+  }
+
   return (
     <div>
       {user ? (
         <Container>
-          <form noValidate autoComplete="off">
+          <Box component="form" noValidate onSubmit={handleSubmit} autoComplete="off">
             <Stack direction={"column"} alignItems="center" spacing={2}>
               <Badge
                 overlap="circular"
@@ -69,8 +79,10 @@ const ProfileDetails = () => {
                 <Grid item xs={6}>
                   <TextField
                     fullWidth
+                    id="name"
+                    name="name"
                     label="Name"
-                    value={user.name}
+                    value={user.name || ''}
                     required
                   />
                 </Grid>
@@ -78,20 +90,22 @@ const ProfileDetails = () => {
                   <TextField
                     fullWidth
                     label="Email"
-                    value={user.email}
+                    name="email"
+                    id="email"
+                    value={user.email || ''}
                     type={"email"}
                     required
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField fullWidth label="Contact Number" required />
+                  <TextField id="phone" name="phone" fullWidth label="Contact Number" required />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
                     disabled
                     fullWidth
                     label="Role"
-                    value={user.role}
+                    value={user.role || ''}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -101,6 +115,8 @@ const ProfileDetails = () => {
                   <TextField
                     required
                     fullWidth
+                    name="password"
+                    id="password"
                     label="Password"
                     type="password"
                   />
@@ -108,7 +124,7 @@ const ProfileDetails = () => {
                 <Grid item xs={6}>
                   <FormControl>
                     <FormLabel>Gender</FormLabel>
-                    <RadioGroup row>
+                    <RadioGroup name="gender" id="gender" row>
                       <FormControlLabel
                         value="female"
                         control={<Radio />}
@@ -123,12 +139,12 @@ const ProfileDetails = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField fullWidth label="Age" />
+                  <TextField fullWidth name="age" id="age" label="Age" />
                 </Grid>
                 <Grid item xs={6}>
                   <FormControl fullWidth>
                     <InputLabel>Blood Group</InputLabel>
-                    <Select>
+                    <Select name="bloodGroup" id="bloodGroup">
                       <MenuItem value={"A+"}>A+</MenuItem>
                       <MenuItem value={"B+"}>B+</MenuItem>
                       <MenuItem value={"A-"}>A-</MenuItem>
@@ -149,6 +165,8 @@ const ProfileDetails = () => {
                     defaultValue={[speci[2], speci[3]]}
                     renderInput={(params) => (
                       <TextField
+                      id="specilities"
+                      name="specilities"
                         {...params}
                         label="Specialists"
                         placeholder="Any Other?"
@@ -157,20 +175,22 @@ const ProfileDetails = () => {
                   />
                 </Grid>
                 <Grid item xs={5}>
-                  <TextField fullWidth label="Experience" type={"number"} />
+                  <TextField name="experience" id="experience" fullWidth label="Experience" type={"number"} />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField fullWidth label="Work In" />
+                  <TextField name="work" id="work" fullWidth label="Work In" />
                 </Grid>
                 <Grid item xs={7}>
                   <TextField
                     fullWidth
                     label="Fee per consultation"
                     type={"number"}
+                    name="fees"
+                    id="fees"
                   />
                 </Grid>
                 <Grid item xs={5}>
-                  <TextField fullWidth label="Your Rating" disabled />
+                  <TextField name="rating" id="rating" fullWidth label="Your Rating" disabled />
                 </Grid>
                 <Grid item xs={12}>
                   <Box
@@ -205,8 +225,14 @@ const ProfileDetails = () => {
                   </Box>
                 </Grid>
               </Grid>
+              <Button
+              type="submit"
+              variant="contained"
+              >
+                Edit
+              </Button>
             </Stack>
-          </form>
+          </Box>
         </Container>
       ) : (
         <h1>Edit Profile</h1>
