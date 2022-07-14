@@ -23,32 +23,55 @@ import {
   Typography
 } from "@mui/material";
 import { useContext } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { AppContext } from "../../../states/app.context";
 import { speci } from "../../DemoData/HomeData";
 
 const ProfileDetails = () => {
   const { user } = useContext(AppContext);
+  const defaultValues = {
+    Name: user.name,
+    Email: user.email,
+  };
+  // const [formdata, setFormdata] = useState({
+  //   Name: user?.name,
+  //   Email: user?.email,
+  // });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // const data = new FormData(e.currentTarget);
-    // const obj = {
-    //   email: data.get("email"),
-    //   password: data.get("password")
-    // }
-  }
+  const {
+    // register,
+    control,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm({
+    defaultValues,
+  });
+
+  // useEffect(() => {
+  //   setFormdata({
+  //     Name: user?.name,
+  //     Email: user?.email,
+  //   });
+  // }, [user]);
 
   return (
     <div>
       {user ? (
         <Container>
-          <Box component="form" noValidate onSubmit={handleSubmit} autoComplete="off">
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit((data) => {
+              console.log(data);
+            })}
+            autoComplete="off"
+          >
             <Stack direction={"column"} alignItems="center" spacing={2}>
               <Badge
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 badgeContent={
-                  <label htmlFor="icon-button-file">
+                  <Box component={"label"} htmlFor="icon-button-file">
                     <Input
                       accept="image/*"
                       id="icon-button-file"
@@ -72,7 +95,7 @@ const ProfileDetails = () => {
                     >
                       <EditIcon fontSize="inherit" />
                     </IconButton>
-                  </label>
+                  </Box>
                 }
               >
                 <Avatar alt="Profile Picture" sx={{ width: 100, height: 100 }}>
@@ -87,105 +110,203 @@ const ProfileDetails = () => {
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
                 <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    id="name"
-                    name="name"
-                    label="Name"
-                    value={user.name || ''}
-                    required
+                  <Controller
+                    name="Name"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <TextField
+                        value={field.value ?? " "}
+                        onChange={field.onChange}
+                        fullWidth
+                        label="Name"
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField
-                    fullWidth
-                    label="Email"
-                    name="email"
-                    id="email"
-                    value={user.email || ''}
-                    type={"email"}
-                    required
+                  <Controller
+                    name="Email"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <TextField
+                        value={field.value ?? " "}
+                        onChange={field.onChange}
+                        fullWidth
+                        label="Email"
+                        type={"email"}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField id="phone" name="phone" fullWidth label="Contact Number" required />
+                  <Controller
+                    name="Phone"
+                    control={control}
+                    rules={{
+                      required: true,
+                      maxLength: 11,
+                      pattern: /^01[13-9]\d{8}$/,
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        fullWidth
+                        value={field.value ?? " "}
+                        onChange={field.onChange}
+                        label="Contact Number"
+                      />
+                    )}
+                  />
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
                     disabled
                     fullWidth
                     label="Role"
-                    value={user.role || ''}
+                    value={user.role || ""}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField fullWidth label="Address" multiline rows={2} />
+                  <Controller
+                    name="Address"
+                    control={control}
+                    rules={{ maxLength: 250 }}
+                    render={({ field }) => (
+                      <TextField
+                        fullWidth
+                        label="Address"
+                        multiline
+                        rows={2}
+                        value={field.value ?? " "}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    id="password"
-                    label="Password"
-                    type="password"
+                  <Controller
+                    name="Password"
+                    control={control}
+                    rules={{
+                      required: true,
+                      // pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        fullWidth
+                        label="Password"
+                        type="password"
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <FormControl>
                     <FormLabel>Gender</FormLabel>
-                    <RadioGroup name="gender" id="gender" row>
-                      <FormControlLabel
-                        value="female"
-                        control={<Radio />}
-                        label="Female"
-                      />
-                      <FormControlLabel
-                        value="male"
-                        control={<Radio />}
-                        label="Male"
-                      />
-                    </RadioGroup>
+                    <Controller
+                      name="Gender"
+                      control={control}
+                      render={({ field }) => (
+                        <RadioGroup
+                          value={field.value ?? " "}
+                          onChange={field.onChange}
+                          row
+                        >
+                          <FormControlLabel
+                            value="female"
+                            control={<Radio />}
+                            label="Female"
+                          />
+                          <FormControlLabel
+                            value="male"
+                            control={<Radio />}
+                            label="Male"
+                          />
+                        </RadioGroup>
+                      )}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={6}>
-                  <TextField fullWidth name="age" id="age" label="Age" />
+                  <Controller
+                    name="Age"
+                    control={control}
+                    rules={{
+                      required: true,
+                      min: 18,
+                      max: 99,
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        fullWidth
+                        value={field.value ?? " "}
+                        onChange={field.onChange}
+                        label="Age"
+                      />
+                    )}
+                  />
                 </Grid>
                 <Grid item xs={6}>
                   <FormControl fullWidth>
                     <InputLabel>Blood Group</InputLabel>
-                    <Select name="bloodGroup" id="bloodGroup">
-                      <MenuItem value={"A+"}>A+</MenuItem>
-                      <MenuItem value={"B+"}>B+</MenuItem>
-                      <MenuItem value={"A-"}>A-</MenuItem>
-                      <MenuItem value={"B-"}>B-</MenuItem>
-                      <MenuItem value={"O+"}>O+</MenuItem>
-                      <MenuItem value={"O-"}>O-</MenuItem>
-                      <MenuItem value={"AB+"}>AB+</MenuItem>
-                      <MenuItem value={"AB-"}>AB-</MenuItem>
-                    </Select>
+                    <Controller
+                      control={control}
+                      name="Blood_Grp"
+                      render={({ field }) => (
+                        <Select
+                          onChange={field.onChange}
+                          value={field.value ?? " "}
+                          defaultValue=" "
+                        >
+                          <MenuItem value={"A+"}>A+</MenuItem>
+                          <MenuItem value={"B+"}>B+</MenuItem>
+                          <MenuItem value={"A-"}>A-</MenuItem>
+                          <MenuItem value={"B-"}>B-</MenuItem>
+                          <MenuItem value={"O+"}>O+</MenuItem>
+                          <MenuItem value={"O-"}>O-</MenuItem>
+                          <MenuItem value={"AB+"}>AB+</MenuItem>
+                          <MenuItem value={"AB-"}>AB-</MenuItem>
+                        </Select>
+                      )}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={7}>
-                  <Autocomplete
-                    multiple
-                    limitTags={2}
-                    options={speci}
-                    getOptionLabel={(option) => option}
-                    defaultValue={[speci[2], speci[3]]}
-                    renderInput={(params) => (
-                      <TextField
-                      id="specilities"
-                      name="specilities"
-                        {...params}
-                        label="Specialists"
-                        placeholder="Any Other?"
+                  <Controller
+                    name="Specialist"
+                    control={control}
+                    rules={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <Autocomplete
+                        multiple
+                        limitTags={2}
+                        options={speci}
+                        getOptionLabel={(option) => option}
+                        defaultValue={[speci[2], speci[3]]}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Specialists"
+                            placeholder="Any Other?"
+                          />
+                        )}
                       />
                     )}
                   />
                 </Grid>
                 <Grid item xs={5}>
-                  <TextField name="experience" id="experience" fullWidth label="Experience" type={"number"} />
+                  <TextField
+                    name="experience"
+                    id="experience"
+                    fullWidth
+                    label="Experience"
+                    type={"number"}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField name="work" id="work" fullWidth label="Work In" />
@@ -200,7 +321,13 @@ const ProfileDetails = () => {
                   />
                 </Grid>
                 <Grid item xs={5}>
-                  <TextField name="rating" id="rating" fullWidth label="Your Rating" disabled />
+                  <TextField
+                    name="rating"
+                    id="rating"
+                    fullWidth
+                    label="Your Rating"
+                    disabled
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Box
@@ -235,10 +362,7 @@ const ProfileDetails = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Button
-              type="submit"
-              variant="contained"
-              >
+              <Button type="submit" variant="contained">
                 Edit
               </Button>
             </Stack>
