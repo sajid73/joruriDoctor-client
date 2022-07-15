@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@emotion/react";
-import React from "react";
 import AppRouter from "./AppRouter";
 import Footer from "./components/common/footer/Footer";
 import Header from "./components/common/header/Header";

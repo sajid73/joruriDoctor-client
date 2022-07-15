@@ -6,10 +6,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: "white",
-          
         },
       },
     },
+
   },
 
   typography: {

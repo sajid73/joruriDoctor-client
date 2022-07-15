@@ -1,5 +1,4 @@
 import { Stack, Typography } from "@mui/material";
-import React from "react";
 import intro from "../../../assets/images/Doctor03.jpg";
 
 const Intro = () => {

@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
@@ -5,19 +6,23 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
+import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signInUser } from "../api";
+import { AppContext } from "../states/app.context";
 
 const SignIn = () => {
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
+  const [open, setOpen] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("submitting form");
     const data = new FormData(event.currentTarget);
 
     const res = await signInUser({
@@ -25,7 +30,10 @@ const SignIn = () => {
       password: data.get("password"),
     });
     if (res.status === 201) {
+      setUser(res.data);
       navigate(from);
+    } else {
+      setOpen(true);
     }
   };
   useEffect(() => {
@@ -115,6 +123,21 @@ const SignIn = () => {
           </Box>
         </Box>
       </Container>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity="error"
+          sx={{ width: "100%", fontWeight: 'bolder' }}
+          elevation={6}
+          variant="filled"
+        >
+          Failed to login! Check email and password
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

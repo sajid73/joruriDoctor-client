@@ -13,9 +13,11 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const loadUserData = async () => {
-    const token = localStorage.getItem("token") || "";
-    const res = await myProfile(token);
-    setUser(res.data.user);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const res = await myProfile(token);
+      setUser(res.data);
+    }
   };
 
   useEffect(() => {
