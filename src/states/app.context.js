@@ -16,7 +16,7 @@ export const AppContextProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     if (token) {
       const res = await myProfile(token);
-      setUser(res.data.user);
+      setUser(res.data);
     }
   };
 

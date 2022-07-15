@@ -1,8 +1,8 @@
-import BarChartIcon from "@mui/icons-material/BarChart";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -29,7 +29,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Profile" />
     </ListItemButton>
-    <ListItemButton component={Link} to="videocall">
+    <ListItemButton component={Link} to="appointmentbook">
       <ListItemIcon>
         <VideoCallIcon />
       </ListItemIcon>
@@ -47,11 +47,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Add Doctor" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="doclist">
       <ListItemIcon>
-        <BarChartIcon />
+        <RecentActorsOutlinedIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Doctor's list" />
     </ListItemButton>
     <ListItemButton onClick={logout} component={Link} to="/">
       <ListItemIcon>

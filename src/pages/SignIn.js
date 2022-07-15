@@ -23,16 +23,14 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("submitting form");
     const data = new FormData(event.currentTarget);
 
     const res = await signInUser({
       email: data.get("email"),
       password: data.get("password"),
     });
-    console.log(res)
     if (res.status === 201) {
-      setUser(res.data.user);
+      setUser(res.data);
       navigate(from);
     } else {
       setOpen(true);

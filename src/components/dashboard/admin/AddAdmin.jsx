@@ -1,10 +1,10 @@
 import {
-    Alert,
-    Button,
-    Grid,
-    Snackbar,
-    TextField,
-    Typography
+  Alert,
+  Button,
+  Grid,
+  Snackbar,
+  TextField,
+  Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
@@ -25,7 +25,6 @@ const AddAdmin = () => {
     } else {
       setSubmitStats({ status: "success", desc: "Admin added!" });
     }
-    console.log(submitStats);
   };
   return (
     <>
