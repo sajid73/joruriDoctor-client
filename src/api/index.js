@@ -7,6 +7,7 @@ export const signUpUser = async (info) => {
   try {
     const res = await axios.post(`${api}/user/signup`, info);
     localStorage.setItem("token", res.data.token);
+    res.data = { ...res.data.user };
     return res;
   } catch (error) {
     return error;
@@ -23,6 +24,7 @@ export const signInUser = async (info) => {
       res.data = { ...res.data.user, ...response.data.doctors[0] };
       return res;
     }
+    res.data = { ...res.data.user };
     return res;
   } catch (error) {
     return error;
@@ -39,6 +41,7 @@ export const myProfile = async (token) => {
       res.data = { ...res.data.user, ...response.data.doctors[0] };
       return res;
     }
+    res.data = { ...res.data.user };
     return res;
   } catch (error) {
     return error;
