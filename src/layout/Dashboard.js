@@ -13,7 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/");
+      navigate("/signin");
     }
   }, [user, navigate]);
 

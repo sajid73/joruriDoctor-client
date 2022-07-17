@@ -26,8 +26,8 @@ const AppointmentTime = () => {
             doc ? <div>
                 <h1>Select appointment time for <em>Dr. {doc.userId.name}</em></h1>
                 <form onSubmit={handleSubmit}>
-                    <label for="birthday">Birthday: </label>
-                    <input type="date" id="birthday" name="birthday" /> <br />
+                    <label for="appointment">Appointment: </label>
+                    <input type="date" id="appointment" name="appointment" /> <br />
                     <Button type="submit" variant="contained" sx={{mt: '10px'}}>
                         Book
                     </Button>

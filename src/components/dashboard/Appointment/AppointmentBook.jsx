@@ -56,6 +56,22 @@ const AppointmentBook = () => {
                     ))}
                 </Select>
             </FormControl>
+            <FormControl sx={{ m: 1, minWidth: 150 }}>
+                <InputLabel>Speciality</InputLabel>
+                <Select
+                    id="demo-simple-select-helper"
+                    label="Speciality"
+                    value={speciality}
+                    onChange={(e) => setDocList(e)}
+                >
+                    <MenuItem value="">
+                        <em>Select specility</em>
+                    </MenuItem>
+                    {speci.map((sp) => (
+                        <MenuItem key={sp} value={sp}>{sp}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {
                     filterDoc?.map((doc) => (<Link key={doc._id} to={doc._id}><ListItem alignItems="flex-start">

@@ -255,15 +255,15 @@ const ProfileDetails = () => {
               </Grid>
               <Grid item xs={7}>
                 <Controller
-                  name="specilities"
+                  name={"specilities"}
                   control={control}
                   // rules={{
                   //   required: true,
                   // }}
-                  render={({ field }) => (
+                  render={({ field: { onChange } }) => (
                     <Autocomplete
                       multiple
-                      limitTags={2}
+                      id="specilities"
                       options={speci}
                       getOptionLabel={(option) => option}
                       defaultValue={user.specilities}
@@ -274,6 +274,10 @@ const ProfileDetails = () => {
                           placeholder="Any Other?"
                         />
                       )}
+                      onChange={(_, data) => {
+                        onChange(data);
+                        return data;
+                      }}
                     />
                   )}
                 />
