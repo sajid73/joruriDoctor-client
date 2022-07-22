@@ -24,7 +24,7 @@ const AppRouter = () => {
         <Route path="test" element={<ProfileLayout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="dashboard" element={<Dashboard />}>
-          <Route path="profile" element={<EditProfile />} />
+          <Route path="profile" index element={<EditProfile />} />
           <Route path="doclist" element={<DoctorList />} />
           <Route path="appointmentbook" element={<AppointmentBook />} />
           <Route path="appointmentbook/:docid" element={<AppointmentTime />} />

@@ -39,7 +39,7 @@ const AppointmentBook = () => {
     }, []);
     return (
         <Container>
-            <FormControl sx={{ m: 1, minWidth: 150 }}>
+            {/* <FormControl sx={{ m: 1, minWidth: 150 }}>
                 <InputLabel id="demo-simple-select-helper-label">Speciality</InputLabel>
                 <Select
                     labelId="demo-simple-select-helper-label"
@@ -55,7 +55,7 @@ const AppointmentBook = () => {
                         <MenuItem key={sp} value={sp}>{sp}</MenuItem>
                     ))}
                 </Select>
-            </FormControl>
+            </FormControl> */}
             <FormControl sx={{ m: 1, minWidth: 150 }}>
                 <InputLabel>Speciality</InputLabel>
                 <Select

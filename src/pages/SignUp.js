@@ -5,11 +5,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signUpUser } from "../api";
+import { AppContext } from "../states/app.context";
 
 const SignUp = () => {
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
@@ -24,6 +26,7 @@ const SignUp = () => {
     };
     const res = await signUpUser(obj);
     if (res.status === 201) {
+      setUser(res.data);
       navigate(from);
     }
   };

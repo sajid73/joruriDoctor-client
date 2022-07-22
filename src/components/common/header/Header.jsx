@@ -192,7 +192,7 @@ const Header = () => {
             {user.name ? (
               <Button
                 component={Link}
-                to="dashboard"
+                to="dashboard/profile"
                 sx={{
                   mx: 3,
                   display: "block",

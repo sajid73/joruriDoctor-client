@@ -56,3 +56,5 @@ export const speci = [
   "Radiologists",
   "Rheumatologists",
 ];
+
+export const qualifications = ["MBBS", "FCPS"];
