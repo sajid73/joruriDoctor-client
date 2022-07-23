@@ -35,6 +35,7 @@ const AppointmentBook = () => {
 
     useEffect(() => {
         setDocList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [qualification, speciality]);
 
     useEffect(() => {
