@@ -24,6 +24,7 @@ const DoctorList = () => {
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Working</TableCell>
+                            <TableCell>Qualifications</TableCell>
                             <TableCell>Specilities</TableCell>
                             <TableCell>Fees</TableCell>
                         </TableRow>
@@ -34,6 +35,7 @@ const DoctorList = () => {
                                 <TableCell>{doc.userId.name}</TableCell>
                                 <TableCell>{doc.userId.email}</TableCell>
                                 <TableCell>{doc.working}</TableCell>
+                                <TableCell>{doc.qualifications?.slice(0,12)} ...</TableCell>
                                 <TableCell>{doc.specilities[0]}</TableCell>
                                 <TableCell>{doc.fees}</TableCell>
                             </TableRow>))

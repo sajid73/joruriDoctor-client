@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/common/NotFound/NotFound";
+import ProfileDetails from "./components/common/Profile/ProfileDetails";
 import ProfileLayout from "./components/common/Profile/ProfileLayout";
 import AddAdmin from "./components/dashboard/admin/AddAdmin";
 import AddDoc from "./components/dashboard/admin/AddDoc";
 import AppointmentBook from "./components/dashboard/Appointment/AppointmentBook";
 import AppointmentTime from "./components/dashboard/Appointment/AppointmentTime";
 import DoctorList from "./components/dashboard/DoctorList";
-import EditProfile from "./components/dashboard/ProfileLayout/EditProfile";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -24,7 +24,7 @@ const AppRouter = () => {
         <Route path="test" element={<ProfileLayout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="dashboard" element={<Dashboard />}>
-          <Route path="profile" element={<EditProfile />} />
+          <Route path="profile" index element={<ProfileDetails />} />
           <Route path="doclist" element={<DoctorList />} />
           <Route path="appointmentbook" element={<AppointmentBook />} />
           <Route path="appointmentbook/:docid" element={<AppointmentTime />} />

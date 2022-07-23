@@ -64,7 +64,7 @@ const HomeCarousel = () => {
                 size="large"
                 color="inherit"
                 component={RouterLink}
-                to="/signin"
+                to="/dashboard/appointmentbook"
                 sx={{
                   width: 300,
                   fontWeight: "bold",
