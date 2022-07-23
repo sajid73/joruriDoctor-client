@@ -1,5 +1,5 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { Button, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -124,12 +124,12 @@ const Header = () => {
                     to={page.link}
                     textAlign="center"
                   >
-                    {page.name}
+                    {page?.name}
                   </Typography>
                 </MenuItem>
               ))}
               {user.name ? (
-                user.name
+                user?.name
               ) : (
                 <MenuItem
                   component={Link}
@@ -195,7 +195,7 @@ const Header = () => {
                 to="dashboard/profile"
                 sx={{
                   mx: 3,
-                  display: "block",
+                  display: "flex",
                   backgroundColor: "black",
                   color: "#00D6A3",
                   fontWeight: "bold",
@@ -205,7 +205,7 @@ const Header = () => {
                   },
                 }}
               >
-                {user.name}
+                <Avatar sx={{ width: 24, height: 24, mx: 1 }} src={user?.avatar} /> {user?.name}
               </Button>
             ) : (
               <Button

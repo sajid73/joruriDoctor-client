@@ -2,7 +2,6 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -45,14 +44,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Appointment" />
     </ListItemButton>
-    <ListItemButton component={NavLink} style={({ isActive }) =>
+    {/* <ListItemButton component={NavLink} style={({ isActive }) =>
       isActive ? activeStyle : undefined
     } to="addadmin">
       <ListItemIcon>
         <SupervisorAccountIcon />
       </ListItemIcon>
       <ListItemText primary="Add Admin" />
-    </ListItemButton>
+    </ListItemButton> */}
     <ListItemButton component={NavLink} style={({ isActive }) =>
       isActive ? activeStyle : undefined
     } to="adddoc">

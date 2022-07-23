@@ -23,6 +23,11 @@ export const signInUser = async (info) => {
       delete response.data.doctors[0].userId;
       res.data = { ...res.data.user, ...response.data.doctors[0] };
       return res;
+    } else if (res.data.user.role === "patient") {
+      const response = await patientInfo(`userId=${res.data.user._id}`);
+      delete response.data.patients[0].userId;
+      res.data = { ...res.data.user, ...response.data.patients[0] };
+      return res;
     }
     res.data = { ...res.data.user };
     return res;
@@ -34,15 +39,29 @@ export const signInUser = async (info) => {
 export const myProfile = async (token) => {
   try {
     const res = await axios.post(`${api}/user/me`, { token });
-    localStorage.setItem("token", res.data.token);
     if (res.data.user.role === "doctor") {
       const response = await doctorInfo(`userId=${res.data.user._id}`);
       delete response.data.doctors[0].userId;
       res.data = { ...res.data.user, ...response.data.doctors[0] };
       return res;
+    } else if (res.data.user.role === "patient") {
+      const response = await patientInfo(`userId=${res.data.user._id}`);
+      delete response.data.patients[0].userId;
+      res.data = { ...res.data.user, ...response.data.patients[0] };
+      return res;
     }
     res.data = { ...res.data.user };
     return res;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateProfile = async (info) => {
+  try {
+    const token = localStorage.getItem("token");
+    await axios.patch(`${api}/user/me`, { token, user: info });
+    return myProfile(token);
   } catch (error) {
     return error;
   }
@@ -71,6 +90,17 @@ export const doctorList = async () => {
 export const doctorInfo = async (query) => {
   try {
     const res = await axios.get(`${api}/doctor?${query}`);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
+// Patient section
+
+export const patientInfo = async (query) => {
+  try {
+    const res = await axios.get(`${api}/patient?${query}`);
     return res;
   } catch (error) {
     return error;

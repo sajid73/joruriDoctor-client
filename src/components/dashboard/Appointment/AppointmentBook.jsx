@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Container, TextField } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
@@ -16,7 +16,8 @@ import { doctorList } from '../../../api';
 import { speci } from '../../DemoData/HomeData';
 
 const AppointmentBook = () => {
-    const [speciality, setSpeciality] = useState("");
+    const [speciality, setSpeciality] = useState('');
+    const [qualification, setQualification] = useState('');
     const [filterDoc, setFiltterDoc] = useState();
     const [doctors, setDoctors] = useState();
 
@@ -25,44 +26,32 @@ const AppointmentBook = () => {
         setDoctors(res?.data?.doctors);
         setFiltterDoc(res?.data?.doctors);
     }
-    const setDocList = (e) => {
-        setSpeciality(e.target.value);
-        if (e.target.value === "") {
-            setFiltterDoc(doctors);
-        } else {
-            const result = doctors.filter(doc => doc.specilities.includes(e.target.value))
-            setFiltterDoc(result);
-        }
+    const setDocList = () => {
+        const result = doctors?.filter(doc => {
+            return (doc.specilities?.includes(speciality) && doc.qualifications?.toLowerCase().includes(qualification?.toLowerCase()))
+        })
+        setFiltterDoc(result);
     }
+
+    useEffect(() => {
+        setDocList();
+    }, [qualification, speciality]);
+
     useEffect(() => {
         loadData();
     }, []);
     return (
         <Container>
-            {/* <FormControl sx={{ m: 1, minWidth: 150 }}>
-                <InputLabel id="demo-simple-select-helper-label">Speciality</InputLabel>
-                <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    label="Speciality"
-                    value={speciality}
-                    onChange={(e) => setDocList(e)}
-                >
-                    <MenuItem value="">
-                        <em>Select specility</em>
-                    </MenuItem>
-                    {speci.map((sp) => (
-                        <MenuItem key={sp} value={sp}>{sp}</MenuItem>
-                    ))}
-                </Select>
-            </FormControl> */}
-            <FormControl sx={{ m: 1, minWidth: 150 }}>
+            <Typography variant='h4' textAlign={'center'}>Select doctor for book an appointment</Typography>
+            <Typography>Filter options</Typography>
+            <FormControl sx={{ mr: 1, my: 1, minWidth: 150 }}>
                 <InputLabel>Speciality</InputLabel>
                 <Select
+                    name='speciality'
                     id="demo-simple-select-helper"
                     label="Speciality"
                     value={speciality}
-                    onChange={(e) => setDocList(e)}
+                    onChange={(e) => setSpeciality(e.target.value)}
                 >
                     <MenuItem value="">
                         <em>Select specility</em>
@@ -71,6 +60,9 @@ const AppointmentBook = () => {
                         <MenuItem key={sp} value={sp}>{sp}</MenuItem>
                     ))}
                 </Select>
+            </FormControl>
+            <FormControl sx={{ mr: 1, my: 1, minWidth: 150 }}>
+                <TextField placeholder='Qualification' name='qualification' onChange={(e) => setQualification(e.target.value)} />
             </FormControl>
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                 {
@@ -88,9 +80,17 @@ const AppointmentBook = () => {
                                         variant="body2"
                                         color="text.primary"
                                     >
-                                        Specilities -
+                                        Specilities —
                                     </Typography>
-                                    {doc.specilities.map((sp) => ` ${sp},`)}
+                                    {doc.specilities.map((sp) => ` ${sp},`)} <br />
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary">
+                                        Qualifications — {" "}
+                                    </Typography>
+                                    {doc.qualifications}
                                 </React.Fragment>
                             }
                         />
