@@ -19,6 +19,7 @@ const Footer = () => {
         justifyContent: "space-between",
         px: 10,
         py: 5,
+        mt: 10,
         color: "white",
         backgroundColor: "#033B48",
       }}

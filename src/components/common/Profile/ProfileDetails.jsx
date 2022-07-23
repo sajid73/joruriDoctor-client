@@ -3,7 +3,10 @@ import {
   Autocomplete,
   Avatar,
   Badge,
-  Box, Button, CircularProgress, FormControl,
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
   FormControlLabel,
   FormLabel,
   Grid,
@@ -168,12 +171,7 @@ const ProfileDetails = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  disabled
-                  fullWidth
-                  label="Role"
-                  value={user.role}
-                />
+                <TextField disabled fullWidth label="Role" value={user.role} />
               </Grid>
               {/* <Grid item xs={6}>
                 <Controller
@@ -403,7 +401,7 @@ const ProfileDetails = () => {
           </Stack>
         </Box>
       ) : (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
       )}
