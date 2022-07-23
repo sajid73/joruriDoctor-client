@@ -3,7 +3,10 @@ import {
   Autocomplete,
   Avatar,
   Badge,
-  Box, Button, CircularProgress, FormControl,
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
   FormControlLabel,
   FormLabel,
   Grid,
@@ -28,9 +31,9 @@ const ProfileDetails = () => {
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = data => {
-    console.log(data)
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div>
       {user.name ? (
@@ -137,12 +140,7 @@ const ProfileDetails = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <TextField
-                  disabled
-                  fullWidth
-                  label="Role"
-                  value={user.role}
-                />
+                <TextField disabled fullWidth label="Role" value={user.role} />
               </Grid>
               <Grid item xs={12}>
                 <Controller
@@ -221,7 +219,7 @@ const ProfileDetails = () => {
                   render={({ field }) => (
                     <TextField
                       fullWidth
-                      value={field.value ?? " "}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                       label="Age"
                     />
@@ -256,17 +254,16 @@ const ProfileDetails = () => {
               <Grid item xs={7}>
                 <Controller
                   name="specilities"
-                  control={control}
-                  // rules={{
-                  //   required: true,
-                  // }}
                   render={({ field }) => (
                     <Autocomplete
+                      {...field}
+                      id="specilities"
                       multiple
                       limitTags={2}
                       options={speci}
                       getOptionLabel={(option) => option}
-                      defaultValue={user.specilities}
+                      // defaultValue={user.specilities}
+                      filterSelectedOptions
                       renderInput={(params) => (
                         <TextField
                           {...params}
@@ -276,33 +273,52 @@ const ProfileDetails = () => {
                       )}
                     />
                   )}
+                  control={control}
+                  onChange={([, data]) => data}
+                  // rules={{
+                  //   required: true,
+                  // }}
                 />
               </Grid>
               <Grid item xs={5}>
-                <Controller name="experience" control={control}
-                  render={({ field }) => (<TextField
-                    {...field}
-                    id="experience"
-                    defaultValue={user.experience}
-                    fullWidth
-                    label="Experience"
-                    type={"number"}
-                  />)} />
+                <Controller
+                  name="experience"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      id="experience"
+                      defaultValue={user.experience}
+                      fullWidth
+                      label="Experience"
+                      type={"number"}
+                    />
+                  )}
+                />
               </Grid>
               <Grid item xs={12}>
-                <TextField defaultValue={user.working} name="work" id="work" fullWidth label="Work In" />
+                <TextField
+                  defaultValue={user.working}
+                  name="work"
+                  id="work"
+                  fullWidth
+                  label="Work In"
+                />
               </Grid>
               <Grid item xs={7}>
                 <Controller
-                name="fees"
-                control={control}
-                  render={({ field }) => (<TextField
-                  {...field}
-                    fullWidth
-                    defaultValue={user.fees}
-                    label="Fee per consultation"
-                    type={"number"}
-                  />)} />
+                  name="fees"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      defaultValue={user.fees}
+                      label="Fee per consultation"
+                      type={"number"}
+                    />
+                  )}
+                />
               </Grid>
               <Grid item xs={5}>
                 <TextField
@@ -352,7 +368,7 @@ const ProfileDetails = () => {
           </Stack>
         </Box>
       ) : (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
       )}

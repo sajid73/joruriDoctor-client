@@ -15,6 +15,14 @@ export const items = [
     align: "flex-start",
     talign: "left",
   },
+  {
+    name: "FAST, AFFORDABLE & RELIABLE",
+    part01: "Committed To",
+    part02: "Trusted",
+    part03: "Health Care",
+    align: "flex-end",
+    talign: "right",
+  },
 ];
 
 export const stepsData = [
@@ -55,4 +63,24 @@ export const speci = [
   "Oncologists",
   "Radiologists",
   "Rheumatologists",
+];
+
+export const qualifi = [
+    "MBBS",
+    "MCPS",
+    "FCPS",
+    "FACP",
+    "FRCP",
+    "MACP",
+    "MD",
+    "WHO Fellow",
+    "PhD",
+    "Commonwealth Fellow",
+    "DM",
+    "BCS(Health)",
+    "CCD",
+    "MRCP",
+    "FCPS",
+    "FCCP",
+    "DTM & H",
 ];
