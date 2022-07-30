@@ -1,6 +1,12 @@
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'; // <-- import styles to be used
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MedicationIcon from '@mui/icons-material/Medication';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import VideocamIcon from '@mui/icons-material/Videocam';
 import { Paper, Stack, Typography } from "@mui/material";
+
+const iconStyle = {
+  color: '#00D6A3',
+  fontSize: '4rem'
+}
 
 const StepCard = ({ data }) => {
   return (
@@ -29,19 +35,9 @@ const StepCard = ({ data }) => {
         }}
       >
         {
-          data.icon === 'glass' ? (<FontAwesomeIcon
-            icon={solid('magnifying-glass')}
-            size="3x"
-            color='#00D6A3'
-          />) : data.icon === 'video' ? (<FontAwesomeIcon
-            icon={solid('video')}
-            size="3x"
-            color='#00D6A3'
-          />) : (<FontAwesomeIcon
-            icon={solid('file-prescription')}
-            size="3x"
-            color='#00D6A3'
-          />)
+          data.icon === 'glass' ? (<SearchOutlinedIcon sx={iconStyle} />) :
+            data.icon === 'video' ? (<VideocamIcon sx={iconStyle} />) :
+              (<MedicationIcon sx={iconStyle} />)
         }
       </Paper>
       <Typography variant="h6">
