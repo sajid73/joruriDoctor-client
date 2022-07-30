@@ -69,7 +69,7 @@ const AppointmentBook = () => {
                 {
                     filterDoc?.map((doc) => (<Link key={doc._id} to={doc._id}><ListItem alignItems="flex-start">
                         <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                            <Avatar alt={doc.userId.name} src={doc.userId.avatar} />
                         </ListItemAvatar>
                         <ListItemText
                             primary={doc.userId.name}
@@ -91,7 +91,15 @@ const AppointmentBook = () => {
                                         color="text.primary">
                                         Qualifications — {" "}
                                     </Typography>
-                                    {doc.qualifications}
+                                    {doc.qualifications} <br />
+                                    <Typography
+                                        sx={{ display: 'inline' }}
+                                        component="span"
+                                        variant="body2"
+                                        color="text.primary">
+                                        Service hours — {" "}
+                                    </Typography>
+                                    {doc.service_hours}
                                 </React.Fragment>
                             }
                         />

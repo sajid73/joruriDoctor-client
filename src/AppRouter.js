@@ -5,6 +5,7 @@ import ProfileLayout from "./components/common/Profile/ProfileLayout";
 import AddAdmin from "./components/dashboard/admin/AddAdmin";
 import AddDoc from "./components/dashboard/admin/AddDoc";
 import AppointmentBook from "./components/dashboard/Appointment/AppointmentBook";
+import AppointmentList from "./components/dashboard/Appointment/AppointmentList/AppointmentList";
 import AppointmentTime from "./components/dashboard/Appointment/AppointmentTime";
 import DoctorList from "./components/dashboard/DoctorList";
 import Dashboard from "./layout/Dashboard";
@@ -27,6 +28,7 @@ const AppRouter = () => {
           <Route path="profile" index element={<ProfileDetails />} />
           <Route path="doclist" element={<DoctorList />} />
           <Route path="appointmentbook" element={<AppointmentBook />} />
+          <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointmentbook/:docid" element={<AppointmentTime />} />
           <Route path="adddoc" element={<AddDoc />} />
           <Route path="addadmin" element={<AddAdmin />} />

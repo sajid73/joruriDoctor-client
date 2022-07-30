@@ -5,8 +5,8 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import { styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import * as React from "react";
-import { mainListItems } from "./listItems";
+import React, { useEffect, useState } from "react";
+import DrawerList from "./DrawerList";
 
 const drawerWidth = 240;
 
@@ -38,10 +38,15 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DashDrawer = () => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  useEffect(() => {
+    if (window.innerWidth <= 760) {
+      setOpen(true);
+    }
+  }, []);
   return (
     <Drawer variant="permanent" open={open}>
       <Toolbar
@@ -57,7 +62,10 @@ const DashDrawer = () => {
         </IconButton>
       </Toolbar>
       <Divider />
-      <List component="nav">{mainListItems}</List>
+      {/* <List component="nav">{mainListItems}</List> */}
+      <List component="nav">
+        <DrawerList />
+      </List>
     </Drawer>
   );
 };

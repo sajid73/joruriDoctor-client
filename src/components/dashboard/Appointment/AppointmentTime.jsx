@@ -3,19 +3,28 @@ import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { doctorInfo } from '../../../api';
+import { createAppointment, doctorInfo } from '../../../api';
 import { AppContext } from '../../../states/app.context';
+import ShowResult from '../../common/others/ShowResult';
 
 const AppointmentTime = () => {
     const { user } = useContext(AppContext);
     const [doc, setDoc] = useState();
     const { control, handleSubmit } = useForm();
-    console.log(user._id);
+    const [submitStats, setSubmitStats] = useState({ status: '', desc: "" });
     let { docid } = useParams();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        if ((new Date(data.appointmentTime) - new Date()) <= 0) {
+            setSubmitStats({ status: 'error', desc: "Can't select past date" });
+        }
         data = { ...data, doctorId: docid, patientId: user._id };
-        console.log(data);
+        const res = await createAppointment(data);
+        if (res?.status === 201) {
+            setSubmitStats({ status: 'success', desc: "Appointment booked" });
+        } else {
+            setSubmitStats({ status: 'error', desc: "Something went wrong on booking" });
+        }
     }
 
     const loadInfo = async () => {
@@ -30,16 +39,16 @@ const AppointmentTime = () => {
     return (<>
         {
             doc ? <div>
-                <h1>Select appointment time for <em>Dr. {doc.userId.name}</em></h1>
+                <h1>Select appointment time for <em style={{ color: "#00D6A3" }}>{doc.userId.name}</em></h1>
                 <Box
                     component="form"
                     noValidate
                     onSubmit={handleSubmit(onSubmit)}>
                     <Stack direction={"column"} alignItems="center" spacing={2}>
-                        <label for="appointment">Date of appointment: </label>
+                        <label htmlFor="appointment">Date of appointment: </label>
                         <Controller name="appointmentTime" control={control} render={({ field }) => (<Input {...field} type="date" id="appointment" name="appointment" />)} /> <br />
                         <Controller name="problem" control={control} render={({ field }) => (
-                            <TextField {...field} placeholder="Define problem" />
+                            <TextField multiline rows={3} sx={{ width: '40%' }} {...field} placeholder="Define problem" />
                         )} /> <br />
                         <Button type="submit" variant="contained" sx={{ mt: '10px' }}>
                             Book
@@ -48,6 +57,7 @@ const AppointmentTime = () => {
                 </Box >
             </div> : <LinearProgress />
         }
+        <ShowResult submitStats={submitStats} setSubmitStats={setSubmitStats} />
     </>);
 };
 

@@ -1,7 +1,7 @@
 const axios = require("axios");
 
-// const api = "http://localhost:3005";
-const api = "https://morning-falls-82437.herokuapp.com";
+const api = "http://localhost:3005";
+// const api = "https://morning-falls-82437.herokuapp.com";
 
 export const signUpUser = async (info) => {
   try {
@@ -101,6 +101,26 @@ export const doctorInfo = async (query) => {
 export const patientInfo = async (query) => {
   try {
     const res = await axios.get(`${api}/patient?${query}`);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
+// Appointment section
+
+export const createAppointment = async (info) => {
+  try {
+    const res = await axios.post(`${api}/appointment`, info);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const appointmentList = async (query) => {
+  try {
+    const res = await axios.get(`${api}/appointment`, {params: query});
     return res;
   } catch (error) {
     return error;
