@@ -14,7 +14,7 @@ const ShowResult = ({ submitStats, setSubmitStats }) => {
         >
             <Alert
                 onClose={() => setSubmitStats({ status: "", desc: "" })}
-                severity={submitStats.status || "success"}
+                severity={submitStats?.status}
                 sx={{ width: "100%", fontWeight: "bolder" }}
                 elevation={6}
                 variant="filled"
