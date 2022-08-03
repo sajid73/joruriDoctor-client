@@ -35,7 +35,8 @@ const DoctorList = () => {
                                 <TableCell>{doc.userId.name}</TableCell>
                                 <TableCell>{doc.userId.email}</TableCell>
                                 <TableCell>{doc.working}</TableCell>
-                                <TableCell>{doc.qualifications?.slice(0,12)} ...</TableCell>
+                                <TableCell>{doc.qualifications}</TableCell>
+                                {/* <TableCell>{doc.qualifications?.slice(0,12)} ...</TableCell> */}
                                 <TableCell>{doc.specilities[0]}</TableCell>
                                 <TableCell>{doc.fees}</TableCell>
                             </TableRow>))
