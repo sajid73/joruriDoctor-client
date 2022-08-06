@@ -120,6 +120,7 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     loadSocket();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, me]);
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
