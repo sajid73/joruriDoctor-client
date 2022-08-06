@@ -7,6 +7,7 @@ import AddDoc from "./components/dashboard/admin/AddDoc";
 import AppointmentBook from "./components/dashboard/Appointment/AppointmentBook";
 import AppointmentList from "./components/dashboard/Appointment/AppointmentList/AppointmentList";
 import AppointmentTime from "./components/dashboard/Appointment/AppointmentTime";
+import Consulting from "./components/dashboard/Consulting";
 import DoctorList from "./components/dashboard/DoctorList";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
@@ -31,6 +32,7 @@ const AppRouter = () => {
           <Route path="appointments" element={<AppointmentList />} />
           <Route path="appointmentbook/:docid" element={<AppointmentTime />} />
           <Route path="adddoc" element={<AddDoc />} />
+          <Route path="video" element={<Consulting />} />
           <Route path="addadmin" element={<AddAdmin />} />
         </Route>
       </Routes>

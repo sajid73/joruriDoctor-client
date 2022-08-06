@@ -16,7 +16,7 @@ const AppointmentTime = () => {
 
     const onSubmit = async (data) => {
         if ((new Date(data.appointmentTime) - new Date()) <= 0) {
-            setSubmitStats({ status: 'error', desc: "Can't select past date" });
+            setSubmitStats({ status: 'error', desc: "Can't select past date or today" });
             return;
         }
         data = { ...data, doctorId: docid, patientId: user._id };
@@ -26,6 +26,7 @@ const AppointmentTime = () => {
         } else {
             setSubmitStats({ status: 'error', desc: "Something went wrong on booking" });
         }
+        console.log(res)
     }
 
     const loadInfo = async () => {

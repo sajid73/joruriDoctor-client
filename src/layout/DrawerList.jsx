@@ -50,6 +50,16 @@ const DrawerList = () => {
                     <ListItemText primary="Appointment" />
                 </ListItemButton> : <></>
             }
+            {
+                (user?.role === 'patient' || user?.role === 'doctor') ? <ListItemButton component={NavLink} style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                } to="video">
+                    <ListItemIcon>
+                        <VideoCallIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Video consulting" />
+                </ListItemButton> : <></>
+            }
             <ListItemButton component={NavLink} style={({ isActive }) =>
                 isActive ? activeStyle : undefined
             } to="appointments">
