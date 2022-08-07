@@ -51,7 +51,7 @@ const DrawerList = () => {
                 </ListItemButton> : <></>
             }
             {
-                (user?.role === 'patient' || user?.role === 'doctor') ? <ListItemButton component={NavLink} style={({ isActive }) =>
+                (user?.role === 'patient') ? <ListItemButton component={NavLink} style={({ isActive }) =>
                     isActive ? activeStyle : undefined
                 } to="video">
                     <ListItemIcon>

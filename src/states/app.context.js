@@ -3,14 +3,14 @@ import Peer from 'simple-peer';
 import { io } from 'socket.io-client';
 import { myProfile, updateProfile } from "../api";
 
-const socket = io('https://warm-wildwood-81069.herokuapp.com');
-
-// const { createContext, useState, useEffect } = require("react");
+// const socket = io("http://localhost:5005");
+const socket = io("https://glacial-ravine-76078.herokuapp.com");
 
 export const AppContext = createContext({});
 
 export const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+
   const [callAccepted, setCallAccepted] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
   const [stream, setStream] = useState();
@@ -22,15 +22,13 @@ export const AppContextProvider = ({ children }) => {
   const userVideo = useRef();
   const connectionRef = useRef();
 
-  const onStart = () => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-
-        myVideo.current.srcObject = currentStream;
-      });
-  }
-
+  const loadUserData = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const res = await myProfile(token);
+      setUser(res.data);
+    }
+  };
   const answerCall = () => {
     setCallAccepted(true);
 
@@ -77,6 +75,43 @@ export const AppContextProvider = ({ children }) => {
     window.location.reload();
   };
 
+  const getUserMedia = async () => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then((currentStream) => {
+        setStream(currentStream);
+
+        myVideo.current.srcObject = currentStream;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+    socket.on('me', (id) => setMe(id));
+
+    socket.on('callUser', ({ from, name: callerName, signal }) => {
+      setCall({ isReceivingCall: true, from, name: callerName, signal });
+    });
+  }
+
+  const loadSocket = async () => {
+    if (user?.role === 'patient' && me !== '') {
+      console.log('role', user.role);
+      console.log('socket', me);
+      await updateProfile({ socketId: me });
+    }
+  }
+
+  useEffect(() => {
+    loadUserData();
+    getUserMedia();
+  }, []);
+
+  useEffect(() => {
+    loadSocket();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, me])
+
+
   const context = {
     user,
     setUser,
@@ -87,41 +122,12 @@ export const AppContextProvider = ({ children }) => {
     stream,
     name,
     setName,
-    onStart,
     callEnded,
     me,
     callUser,
     leaveCall,
     answerCall
   };
-
-  const loadUserData = async () => {
-    const token = localStorage.getItem("token");
-    socket.on('me', (id) => setMe(id));
-
-    socket.on('callUser', ({ from, name: callerName, signal }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal });
-    });
-    if (token) {
-      const res = await myProfile(token);
-      setUser(res.data);
-    }
-  };
-
-  const loadSocket = async () => {
-    if (user.role === 'patient' && me !== '') {
-      await updateProfile({ socketId: me })
-    }
-  }
-
-  useEffect(() => {
-    loadUserData();
-  }, []);
-
-  useEffect(() => {
-    loadSocket();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, me]);
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
 };

@@ -18,7 +18,6 @@ const AppointmentList = () => {
     const loadAppointments = async () => {
         const res = await appointmentList({ userId: user._id, role: user.role });
         setAppointments(res?.data?.appiontments);
-        console.log(res?.data?.appiontments);
     }
     useEffect(() => {
         if (user) {
@@ -34,7 +33,7 @@ const AppointmentList = () => {
                 user?.role === 'patient' ? (<>
                     <h1>Your booked appointments</h1>
                     {
-                        appointments?.map(appointment => <div style={appStyle}>
+                        appointments?.map(appointment => <div key={appointment._id} style={appStyle}>
                             <p>Doctor: <em>{appointment.doctorId.userId.name}</em></p>
                             <p>Service hours: <em>{appointment.doctorId.service_hours}</em></p>
                             <p>Date: {appointment.appointmentTime.slice(0, 10)}</p>
@@ -43,7 +42,7 @@ const AppointmentList = () => {
                 </>) : (<div>
                     <h1>Your today's appointments:</h1>
                     {
-                        appointments?.map(appointment => <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'lightblue', margin: '5px 0', padding: '2px 1rem', borderRadius: '15px' }}>
+                        appointments?.map(appointment => <div key={appointment._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'lightblue', margin: '5px 0', padding: '2px 1rem', borderRadius: '15px' }}>
                             <div>
                                 <p><b>Patient:</b> {appointment.patientId.userId.name}</p>
                                 <p><b>Date:</b> {appointment.appointmentTime.slice(0, 10)}</p>

@@ -9,11 +9,9 @@ import { AppContextProvider } from "./states/app.context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AppContextProvider>
-    <React.StrictMode>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>
   </AppContextProvider>
 );
 // If you want to start measuring performance in your app, pass a function

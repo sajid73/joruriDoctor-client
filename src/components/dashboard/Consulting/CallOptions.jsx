@@ -1,46 +1,32 @@
-import { Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
-import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
-import { Snackbar } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+import { Phone, PhoneDisabled } from '@material-ui/icons';
+import { Button, Container, Grid, Paper, TextField, Typography } from "@mui/material";
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../../states/app.context';
 
 const CallOptions = ({ children }) => {
-    const { callAccepted, me, name, setName, callEnded, leaveCall, callUser, user } = useContext(AppContext);
-    const [idToCall, setIdToCall] = useState('');
-    const [open, setOpen] = useState(false);
+    const { callAccepted, setName, callEnded, leaveCall, callUser, user } = useContext(AppContext);
 
     useEffect(() => {
-      setName(user?.name)
-
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+        setName(user?.name)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
 
     return (
-        <Container style={{
-            width: '600px',
-            margin: '35px 0',
-            padding: 0,
-        }}>
+        <Container>
             <Paper elevation={10} sx={{
                 p: '10px 20px',
                 border: '2px solid black',
             }}>
-                <form style={{
-                    display: 'flex',
-                    flexDirection: 'column'
-                }} noValidate autoComplete="off">
+                <form noValidate autoComplete="off">
                     <Grid container style={{ width: '100%' }}>
                         <Grid item xs={12} md={6} style={{ padding: 20 }}>
                             <Typography gutterBottom variant="h6">Account Info</Typography>
-                            <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
-                            <Button variant="contained" onClick={() => { navigator.clipboard.writeText(me); setOpen(true) }} color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>
-                                Copy Your ID
-                            </Button>
+                            <TextField value={user?.name} disabled fullWidth />
                         </Grid>
                         <Grid item xs={12} md={6} style={{ padding: 20 }}>
                             <Typography gutterBottom variant="h6">Make a call</Typography>
-                            <TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
+                            {/* <TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth /> */}
                             {callAccepted && !callEnded ? (
                                 <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} style={{ marginTop: 20 }}>
                                     Hang Up
@@ -54,12 +40,6 @@ const CallOptions = ({ children }) => {
                     </Grid>
                 </form>
                 {children}
-                <Snackbar
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    message="Text copied!"
-                />
             </Paper>
         </Container>
     );
