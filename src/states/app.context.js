@@ -27,6 +27,7 @@ export const AppContextProvider = ({ children }) => {
     if (token) {
       const res = await myProfile(token);
       setUser(res.data);
+      setName(res.data.name);
     }
   };
   const answerCall = () => {
