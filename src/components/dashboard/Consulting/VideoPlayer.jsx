@@ -24,9 +24,9 @@ const VideoPlayer = () => {
             {call.name && <Typography variant="h5" gutterBottom>Call from {call.name}</Typography>}<br />
             <Paper sx={{ p: '10px', border: '2px solid black', m: '10px' }}>
                 <Box item xs={12} md={6} style={{ padding: '1rem', position: 'relative' }}>
-                    <video playsInline muted ref={currentVideo} autoPlay style={{ width: 700 }} />
+                    <video playsInline muted ref={userVideo} autoPlay style={{ width: 700 }} />
                     {
-                        callAccepted && !callEnded && (<video style={{ position: 'absolute', width: 300, bottom: 0, right: 0, border: '3px solid #00D6A3', borderRadius: '10px' }} playsInline muted ref={userVideo} autoPlay />)
+                        callAccepted && !callEnded && (<video style={{ position: 'absolute', width: 300, bottom: 0, right: 0, border: '3px solid #00D6A3', borderRadius: '10px' }} playsInline muted ref={currentVideo} autoPlay />)
                     }
                 </Box>
             </Paper>
