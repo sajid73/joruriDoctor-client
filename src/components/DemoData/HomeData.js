@@ -85,3 +85,4 @@ export const qualifi = [
     "DTM & H",
 ];
 export const qualifications = ["MBBS", "FCPS"];
+

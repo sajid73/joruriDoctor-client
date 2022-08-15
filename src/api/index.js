@@ -1,7 +1,7 @@
 const axios = require("axios");
 
-const api = "http://localhost:3005";
-// const api = "https://morning-falls-82437.herokuapp.com";
+// const api = "http://localhost:3005";
+const api = "https://morning-falls-82437.herokuapp.com";
 
 export const signUpUser = async (info) => {
   try {
