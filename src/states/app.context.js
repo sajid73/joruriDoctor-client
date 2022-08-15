@@ -18,11 +18,12 @@ export const AppContextProvider = ({ children }) => {
   const [call, setCall] = useState({});
   const [me, setMe] = useState('');
 
-  const myVideo = useRef();
-  const userVideo = useRef();
-  const connectionRef = useRef();
+  const myVideo = useRef(null);
+  const userVideo = useRef(null);
+  const connectionRef = useRef(null);
 
   const loadUserData = async () => {
+    socket.on('me', (id) => setMe(id));
     const token = localStorage.getItem("token");
     if (token) {
       const res = await myProfile(token);
@@ -52,6 +53,7 @@ export const AppContextProvider = ({ children }) => {
     const peer = new Peer({ initiator: true, trickle: false, stream });
 
     peer.on('signal', (data) => {
+      console.log(data);
       socket.emit('callUser', { userToCall: id, signalData: data, from: me, name });
     });
 
@@ -62,7 +64,7 @@ export const AppContextProvider = ({ children }) => {
     socket.on('callAccepted', (signal) => {
       setCallAccepted(true);
 
-      peer.signal(signal);
+    peer.signal(signal);
     });
 
     connectionRef.current = peer;
@@ -70,9 +72,7 @@ export const AppContextProvider = ({ children }) => {
 
   const leaveCall = () => {
     setCallEnded(true);
-
     connectionRef.current.destroy();
-
     window.location.reload();
   };
 
@@ -81,17 +81,14 @@ export const AppContextProvider = ({ children }) => {
       .then((currentStream) => {
         setStream(currentStream);
 
-        myVideo.current.srcObject = currentStream;
+        // myVideo.current.srcObject = currentStream;
+        let video = myVideo.current;
+        video.srcObject = currentStream;
+        // video.play();
       })
       .catch((err) => {
         console.log(err);
       })
-
-    socket.on('me', (id) => setMe(id));
-
-    socket.on('callUser', ({ from, name: callerName, signal }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal });
-    });
   }
 
   const loadSocket = async () => {
@@ -100,11 +97,15 @@ export const AppContextProvider = ({ children }) => {
       console.log('socket', me);
       await updateProfile({ socketId: me });
     }
+    socket.on('callUser', ({ from, name: callerName, signal }) => {
+      setCall({ isReceivingCall: true, from, name: callerName, signal });
+    });
   }
 
   useEffect(() => {
     loadUserData();
-    getUserMedia();
+    // getUserMedia();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -127,7 +128,8 @@ export const AppContextProvider = ({ children }) => {
     me,
     callUser,
     leaveCall,
-    answerCall
+    answerCall,
+    getUserMedia
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

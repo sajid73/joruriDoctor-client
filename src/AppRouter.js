@@ -33,6 +33,7 @@ const AppRouter = () => {
           <Route path="appointmentbook/:docid" element={<AppointmentTime />} />
           <Route path="adddoc" element={<AddDoc />} />
           <Route path="video" element={<Consulting />} />
+          <Route path="video/:apntid" element={<Consulting />} />
           <Route path="addadmin" element={<AddAdmin />} />
         </Route>
       </Routes>
