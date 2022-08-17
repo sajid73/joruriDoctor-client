@@ -47,17 +47,7 @@ const DrawerList = () => {
                     <ListItemIcon>
                         <VideoCallIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Appointment" />
-                </ListItemButton> : <></>
-            }
-            {
-                (user?.role === 'patient') ? <ListItemButton component={NavLink} style={({ isActive }) =>
-                    isActive ? activeStyle : undefined
-                } to="video">
-                    <ListItemIcon>
-                        <VideoCallIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Video consulting" />
+                    <ListItemText primary="Book Appointment" />
                 </ListItemButton> : <></>
             }
             <ListItemButton component={NavLink} style={({ isActive }) =>
