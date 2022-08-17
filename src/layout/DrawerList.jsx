@@ -47,7 +47,7 @@ const DrawerList = () => {
                     <ListItemIcon>
                         <VideoCallIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Appointment" />
+                    <ListItemText primary="Book Appointment" />
                 </ListItemButton> : <></>
             }
             <ListItemButton component={NavLink} style={({ isActive }) =>

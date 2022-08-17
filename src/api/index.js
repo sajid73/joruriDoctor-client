@@ -118,9 +118,27 @@ export const createAppointment = async (info) => {
   }
 };
 
+export const getAppointment = async (id) => {
+  try {
+    const res = await axios.patch(`${api}/appointment/${id}`);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateAppointment = async (id, info) => {
+  try {
+    const res = await axios.patch(`${api}/appointment/${id}`, info);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const appointmentList = async (query) => {
   try {
-    const res = await axios.get(`${api}/appointment`, {params: query});
+    const res = await axios.get(`${api}/appointment`, { params: query });
     return res;
   } catch (error) {
     return error;

@@ -9,12 +9,14 @@ import DashDrawer from "./DashDrawer";
 const mdTheme = createTheme();
 
 const Dashboard = () => {
-  const { user } = useContext(AppContext);
+  const { user,getUserMedia } = useContext(AppContext);
   const navigate = useNavigate();
   useEffect(() => {
+    getUserMedia();
     if (!localStorage.getItem("token")) {
       navigate("/signin");
     }
+    // eslint-disable-next-line
   }, [user, navigate]);
 
   return (
