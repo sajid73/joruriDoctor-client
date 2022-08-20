@@ -19,7 +19,7 @@ const Intro = () => {
         </Typography>
         <Typography variant="body1" align="justify">
           JoruriDoctor is an online medical service app where patients can get
-          24/7 video consultation from doctors. DocTime uses 256 bit encryption
+          24/7 video consultation from doctors. JoruriDoctor uses 256 bit encryption
           to secure the video consultation. Patient can keep their previous
           consultation history and view online prescriptions.
           <br />

@@ -11,20 +11,20 @@ const AppointmentTime = () => {
     const { user } = useContext(AppContext);
     const [doc, setDoc] = useState();
     const { control, handleSubmit } = useForm();
-    const [submitStats, setSubmitStats] = useState({ status: '', desc: "" });
+    const [submitStats, setSubmitStats] = useState({ status: '', desc: "", open: false });
     let { docid } = useParams();
 
     const onSubmit = async (data) => {
         if ((new Date(data.appointmentTime) - new Date()) <= 0) {
-            setSubmitStats({ status: 'error', desc: "Can't select past date or today" });
+            setSubmitStats({ status: 'error', desc: "Can't select past date or today", open: true });
             return;
         }
         data = { ...data, doctorId: docid, patientId: user._id };
         const res = await createAppointment(data);
         if (res?.status === 201) {
-            setSubmitStats({ status: 'success', desc: "Appointment booked" });
+            setSubmitStats({ status: 'success', desc: "Appointment booked", open: true });
         } else {
-            setSubmitStats({ status: 'error', desc: "Something went wrong on booking" });
+            setSubmitStats({ status: 'error', desc: "Something went wrong on booking", open: true });
         }
         console.log(res)
     }

@@ -8,7 +8,7 @@ import ShowResult from '../../common/others/ShowResult';
 const Prescription = () => {
     const { control, handleSubmit } = useForm();
     const [prescription, setPrescription] = useState({ problem: '', prescription: '', exams: '' });
-    const [submitStats, setSubmitStats] = useState({ status: '', desc: "" });
+    const [submitStats, setSubmitStats] = useState({ status: '', desc: "", open: false });
     const { apntid } = useParams();
     const onSubmit = async (data) => {
         console.log(data);
@@ -19,9 +19,9 @@ const Prescription = () => {
         const res = await updateAppointment(apntid, obj);
         console.log(res)
         if (res?.status === 200) {
-            setSubmitStats({ status: 'success', desc: "Appointment done" });
+            setSubmitStats({ status: 'success', desc: "Appointment done", open: true });
         } else {
-            setSubmitStats({ status: 'error', desc: "Something went wrong on appointment" });
+            setSubmitStats({ status: 'error', desc: "Something went wrong on appointment", open: true });
         }
     }
     const loadPrescription = async () => {
