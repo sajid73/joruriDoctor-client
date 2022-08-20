@@ -31,7 +31,7 @@ import ShowResult from "../others/ShowResult";
 
 const ProfileDetails = () => {
   const { user, setUser } = useContext(AppContext);
-  const [submitStats, setSubmitStats] = useState({ status: "", desc: "" });
+  const [submitStats, setSubmitStats] = useState({ status: "", desc: "", open: false });
   const [avatar, setAvatar] = useState('');
   // const [preview, setPreview] = useState();
 
@@ -46,9 +46,9 @@ const ProfileDetails = () => {
     const res = await updateProfile(data);
     if (res.status === 201) {
       setUser(res.data);
-      setSubmitStats({ status: "success", desc: "Profile updated!" });
+      setSubmitStats({ status: "success", desc: "Profile updated!", open: true });
     } else {
-      setSubmitStats({ status: "error", desc: "Failed to update!" });
+      setSubmitStats({ status: "error", desc: "Failed to update!", open: true });
     }
   }
 
@@ -295,6 +295,9 @@ const ProfileDetails = () => {
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
+                        sx={{
+                          color: '#01D6A3'
+                        }}
                       >
                         <Box
                           sx={{
@@ -306,6 +309,7 @@ const ProfileDetails = () => {
                           {user?.rating || 75}%
                         </Box>
                         <CircularProgress
+                          color="inherit"
                           variant="determinate"
                           value={user?.rating || 75}
                           thickness={7.5}
@@ -404,9 +408,10 @@ const ProfileDetails = () => {
         <Box sx={{ display: "flex" }}>
           <CircularProgress />
         </Box>
-      )}
+      )
+      }
       <ShowResult submitStats={submitStats} setSubmitStats={setSubmitStats} />
-    </div>
+    </div >
   );
 };
 

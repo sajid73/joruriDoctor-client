@@ -12,6 +12,7 @@ import DoctorList from "./components/dashboard/DoctorList";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import Service from "./pages/Service";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
@@ -21,6 +22,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="service" element={<Service />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="test" element={<ProfileLayout />} />
