@@ -95,27 +95,27 @@ export const qualifi = [
 export const articlesData = [
   {
     id: 1,
-    img: panel1,
+    urlToImage: panel1,
     title: "How much aspirin to take for stroke",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
     date1: "16",
     date2: "Jan 2022",
     author: "Kowshik"
   },
   {
     id: 2,
-    img: panel2,
+    urlToImage: panel2,
     title: "Implant Surgical equipment technology",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
     date1: "16",
     date2: "Jan 2022",
     author: "Alex"
   },
   {
     id: 3,
-    img: panel3,
+    urlToImage: panel3,
     title: "The Benefits of Middle-Age Fitness",
-    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
     date1: "16",
     date2: "Jan 2022",
     author: "Sajid"

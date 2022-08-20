@@ -4,14 +4,40 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Link, MenuItem, TextField } from "@mui/material";
+import { Alert, Link, MenuItem, Snackbar, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState('')
+  const [open, setOpen] = useState({
+    open: false,
+    msg: 'Invalid email',
+    status: "error"
+  })
+  const handleChange = (e) => {
+    setEmail(e.target.value)
+  }
+  const checkEmail = () => {
+    // eslint-disable-next-line
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      setOpen({
+        open: true,
+        msg: 'Subscribed',
+        status: "success"
+      })
+    } else {
+      setOpen({
+        open: true,
+        msg: 'Invalid email',
+        status: "error"
+      })
+    }
+  }
   return (
     <Box
       sx={{
@@ -22,7 +48,7 @@ const Footer = () => {
         py: 5,
         mt: 10,
         color: "white",
-        backgroundColor: "#033B48",
+        backgroundColor: "#033B48"
       }}
     >
       <Stack direction={"column"} spacing={4}>
@@ -75,6 +101,7 @@ const Footer = () => {
             label="Enter Your Email"
             variant="outlined"
             size="small"
+            onChange={handleChange}
             sx={{
               borderRadius: 5,
               "& .MuiInputLabel-root": { color: "white" },
@@ -92,12 +119,32 @@ const Footer = () => {
             sx={{
               backgroundColor: "#3DE49A",
               color: "white",
+              mx: 2
+            }}
+            onClick={() => {
+              checkEmail()
             }}
           >
             <EmailIcon />
           </IconButton>
         </Box>
       </Stack>
+      <Snackbar
+        open={open.open}
+        autoHideDuration={4000}
+        onClose={() => {
+          setOpen({ ...open, open: false })
+        }}
+      >
+        <Alert
+          severity={open.status}
+          sx={{ width: "100%", fontWeight: "bolder" }}
+          elevation={6}
+          variant="filled"
+        >
+          {open.msg}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

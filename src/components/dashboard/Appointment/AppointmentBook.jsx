@@ -16,7 +16,7 @@ import { doctorList } from "../../../api";
 import { speci } from "../../DemoData/HomeData";
 
 const AppointmentBook = () => {
-  const [speciality, setSpeciality] = useState("");
+  const [speciality, setSpeciality] = useState();
   const [qualification, setQualification] = useState("");
   const [filterDoc, setFiltterDoc] = useState();
   const [doctors, setDoctors] = useState();
@@ -31,7 +31,7 @@ const AppointmentBook = () => {
   const setDocList = () => {
     const result = doctors?.filter((doc) => {
       return (
-        doc.specilities?.includes(speciality) &&
+        (speciality ? doc.specilities?.includes(speciality) : true) &&
         doc.qualifications?.toLowerCase().includes(qualification?.toLowerCase())
       );
     });

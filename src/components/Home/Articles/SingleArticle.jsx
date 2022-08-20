@@ -28,18 +28,18 @@ const SingleArticle = ({ data }) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  // const [clicked, setClicked] = React.useState(true);
+  const d = new Date(data.publishedAt);
+  console.log(data);
 
   return (
-    <Card sx={{ maxWidth: 345, borderRadius: 3 }}>
+    <Card sx={{ maxWidth: 345, borderRadius: 3, minHeight: 600 }}>
       <CardMedia
         component="img"
         height="284"
-        image={data.img}
+        image={data.urlToImage}
         alt="Article_Pic"
       />
-      <CardHeader title={data.title} />
+      <CardHeader title={data.title.length <= 60 ? data.title : `${data.title.slice(0,60)} ...`} sx={{mt: 5}} />
       <CardContent>
         <Paper
           sx={{
@@ -54,26 +54,14 @@ const SingleArticle = ({ data }) => {
             p: 0.3,
           }}
         >
-          <Typography variant="h4">16</Typography>
-          <Typography variant="caption">{data.date2}</Typography>
+          <Typography variant="h4">{d.getDate()}</Typography>
+          <Typography variant="caption">{`${d.toDateString().slice(3,7)} ${d.getFullYear()}`}</Typography>
         </Paper>
         <Typography variant="body2" color="text.secondary">
-          {data.desc}
+          {data.description.length <= 80 ? data.description : `${data.description.slice(0,80)}...`}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        {/* <IconButton
-          aria-label="add to favorites"
-          sx={{
-            color: clicked ? "#707070" : "#00D6A3",
-          }}
-          onClick={ () => setClicked(!clicked) }
-        >
-          <FavoriteIcon />
-        </IconButton> */}
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -86,12 +74,7 @@ const SingleArticle = ({ data }) => {
       <Collapse in={expanded} timeout="3" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Molestias voluptatem et quia nobis iure, deserunt error, consequatur
-            eum voluptatum ducimus maiores! Tempore, fugit. Esse nihil tenetur
-            quidem iste quas autem! Harum tempora, accusamus at cupiditate
-            aliquid inventore vitae aspernatur laudantium architecto, totam a
-            nisi natus unde, facere pariatur! Ipsam iure facilis vitae
-            necessitatibus!
+            {data.description}
           </Typography>
         </CardContent>
       </Collapse>

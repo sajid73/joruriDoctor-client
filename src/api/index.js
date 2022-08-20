@@ -148,11 +148,10 @@ export const appointmentList = async (query) => {
 export const blogList = async (query) => {
   try {
     const d = new Date();
-    const url = `https://newsapi.org/v2/everything?q=Health&from=${d.getFullYear()}-${
-      d.getMonth() + 1
-    }-${d.getDate()}&sortBy=popularity&apiKey=103827d534c644379f1802564ec4c2b1`;
+    const url = `https://newsapi.org/v2/everything?q=Health&from=${d.getFullYear()}-${d.getMonth() + 1
+      }-${d.getDate()}&page=1&pageSize=3&sortBy=popularity&apiKey=103827d534c644379f1802564ec4c2b1`;
     const res = await axios.get(url);
-    console.log(res);
+    return res
   } catch (error) {
     return error;
   }

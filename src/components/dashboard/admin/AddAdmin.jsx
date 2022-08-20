@@ -10,7 +10,7 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 
 const AddAdmin = () => {
-  const [submitStats, setSubmitStats] = useState({ status: "", desc: "" });
+  const [submitStats, setSubmitStats] = useState({ status: "", desc: "", open: false });
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -21,9 +21,9 @@ const AddAdmin = () => {
       repassword: data.get("retype-password"),
     };
     if (formData.password !== formData.repassword) {
-      setSubmitStats({ status: "error", desc: "Failed to add!" });
+      setSubmitStats({ status: "error", desc: "Failed to add!", open: true });
     } else {
-      setSubmitStats({ status: "success", desc: "Admin added!" });
+      setSubmitStats({ status: "success", desc: "Admin added!", open: true });
     }
   };
   return (
@@ -94,10 +94,10 @@ const AddAdmin = () => {
             : false
         }
         autoHideDuration={4000}
-        onClose={() => setSubmitStats({ status: "", desc: "" })}
+        onClose={() => setSubmitStats({ ...submitStats, open: false })}
       >
         <Alert
-          onClose={() => setSubmitStats({ status: "", desc: "" })}
+          onClose={() => setSubmitStats({ ...submitStats, open: false })}
           severity={submitStats.status || "success"}
           sx={{ width: "100%", fontWeight: "bolder" }}
           elevation={6}

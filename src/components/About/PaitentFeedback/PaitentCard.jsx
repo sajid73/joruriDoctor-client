@@ -31,16 +31,7 @@ const PaitentCard = (props) => {
           backgroundColor: "#0F4553",
           px: 4,
           pb: 5,
-          pt: 2,
-        //   quotes: `\201C""\201D""\2018""\2019`,
-          "&:after": {
-            color: "#ccc",
-            content: "close-quote",
-            fontSize: "10em",
-            lineHeight: ".1em",
-            marginLeft: "0.25em",
-            verticalAlign: "-0.4em",
-          },
+          pt: 4
         }}
       >
         {feedback}

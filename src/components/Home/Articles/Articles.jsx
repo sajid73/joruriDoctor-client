@@ -1,10 +1,19 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
-import { articlesData } from "../../DemoData/HomeData";
+import { Container, Grid, Skeleton, Stack, Typography } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import { blogList } from "../../../api";
 import SingleArticle from "./SingleArticle";
 
 const Articles = () => {
-  // blogList();
+  const [articles, setArticles] = useState();
+  const loadArticles = async () => {
+    const res = await blogList();
+    setArticles(res?.data?.articles);
+  }
+  useEffect(() => {
+    loadArticles();
+  }, [])
+
 
   return (
     <Container
@@ -13,7 +22,7 @@ const Articles = () => {
       }}
     >
       <Stack direction="column" spacing={3}>
-        <span>OUR BLOG</span>
+        {/* <span>OUR BLOG</span> */}
         <Typography variant="h3" fontWeight={700}>
           Recent Articles and News
         </Typography>
@@ -28,11 +37,20 @@ const Articles = () => {
             spacing={{ xs: 2, md: 0 }}
             columns={{ xs: 1, sm: 8, md: 12 }}
           >
-            {articlesData.map((article) => (
+            {articles ? articles.map((article) => (
               <Grid item={true} xs={2} sm={4} md={4}>
                 <SingleArticle key={article.id} data={article} />
               </Grid>
-            ))}
+            )) : (<Grid container wrap='nowrap' gap={2}>
+              {
+                Array.from(new Array(3)).map(() => ((
+                  <Box sx={{ width: 345, marginRight: 0.5, my: 5 }}>
+                    <Skeleton variant="rectangular" width={345} height={200} />
+                    <Skeleton />
+                    <Skeleton width="60%" />
+                  </Box>)))
+              }
+            </Grid>)}
           </Grid>
         </Container>
       </Stack>

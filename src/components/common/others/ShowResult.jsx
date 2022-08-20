@@ -4,16 +4,12 @@ import React from 'react';
 const ShowResult = ({ submitStats, setSubmitStats }) => {
     return (
         <Snackbar
-            open={
-                submitStats.status === "success" || submitStats.status === "error"
-                    ? true
-                    : false
-            }
+            open={submitStats.open}
             autoHideDuration={4000}
-            onClose={() => setSubmitStats({ status: "", desc: "" })}
+            onClose={() => setSubmitStats({ ...submitStats, open: false })}
         >
             <Alert
-                onClose={() => setSubmitStats({ status: "", desc: "" })}
+                onClose={() => setSubmitStats({ ...submitStats, open: false })}
                 severity={submitStats?.status}
                 sx={{ width: "100%", fontWeight: "bolder" }}
                 elevation={6}

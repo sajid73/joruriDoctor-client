@@ -18,7 +18,7 @@ import { addDoctor } from "../../../api";
 import { speci } from "../../DemoData/HomeData";
 
 const AddDoc = () => {
-  const [submitStats, setSubmitStats] = useState({ status: "", desc: "" });
+  const [submitStats, setSubmitStats] = useState({ status: "", desc: "", open: false });
   const [specilities, setSpecilities] = useState();
   const [gender, setGender] = useState();
   const navigate = useNavigate();
@@ -39,10 +39,10 @@ const AddDoc = () => {
     console.log(formData)
     if (formData.password === data.get("retype-password")) {
       await addDoctor(formData);
-      setSubmitStats({ status: "success", desc: "Doctor added!" });
+      setSubmitStats({ status: "success", desc: "Doctor added!", open: true });
       navigate("/dashboard/doclist");
     } else {
-      setSubmitStats({ status: "error", desc: "Failed to add!" });
+      setSubmitStats({ status: "error", desc: "Failed to add!", open: true });
     }
   };
   return (
@@ -156,10 +156,10 @@ const AddDoc = () => {
             : false
         }
         autoHideDuration={4000}
-        onClose={() => setSubmitStats({ status: "", desc: "" })}
+        onClose={() => setSubmitStats({ ...submitStats, open: true })}
       >
         <Alert
-          onClose={() => setSubmitStats({ status: "", desc: "" })}
+          onClose={() => setSubmitStats({ ...submitStats, open: true })}
           severity={submitStats.status || "success"}
           sx={{ width: "100%", fontWeight: "bolder" }}
           elevation={6}

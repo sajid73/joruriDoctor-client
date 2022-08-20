@@ -52,22 +52,22 @@ const PaitentFeedBack = () => {
         </Stack>
       </Paper>
       <Paper
-        elevation={0}
+        elevation={3}
         sx={{
           backgroundColor: "#033B4A",
           p: 10,
-          position: "absolute",
-          top: "115rem",
-          right: "1rem",
+          position: "relative",
+          top: '5rem',
+          right: "3rem",
           width: "50%",
-          height: "200px",
-          justifyContent: "center",
+          height: "250px",
+          justifyContent: "center"
         }}
       >
-        <Swiper
+        <Swiper 
           loop={true}
           autoplay={{
-            delay: 7500,
+            delay: 4500,
             disableOnInteraction: false,
           }}
           modules={[Autoplay]}
