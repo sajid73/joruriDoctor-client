@@ -1,6 +1,7 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { doctorList } from "../../../api";
 import DoctorCard from "./DoctorCard";
 
@@ -17,7 +18,9 @@ const AllDoctors = () => {
   }, []);
 
   const filterDoctors = doctors?.slice(-3);
-  console.log(filterDoctors);
+
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -27,8 +30,9 @@ const AllDoctors = () => {
         justifyContent: "center",
         alignItems: "center",
         color: "white",
-        gap: 3,
+        gap: 4,
         py: 10,
+        mb: 5,
       }}
     >
       <Typography variant="subtitle1">MEET OUR EXPERIENCED TEAM</Typography>
@@ -51,6 +55,24 @@ const AllDoctors = () => {
           ))}
         </Grid>
       </Container>
+      <Button
+        variant="contained"
+        size="large"
+        sx={{
+          backgroundColor: "#3DE49A",
+          color: "#033B4A",
+          fontWeight: "bold",
+          "&:hover": {
+            backgroundColor: "white",
+          },
+          width: '20rem'
+        }}
+        onClick={() => {
+          navigate("/service");
+        }}
+      >
+        <Typography varient='h3'>See All</Typography>
+      </Button>
     </Box>
   );
 };

@@ -1,3 +1,8 @@
+import panel1 from "../../../src/assets/images/Online_Demo1.jpg";
+import panel2 from "../../../src/assets/images/Online_Demo2.jpg";
+import panel3 from "../../../src/assets/images/Online_Demo3.jpg";
+
+
 export const items = [
   {
     name: "LED BY PASSIONATE EXPERTS",
@@ -84,5 +89,35 @@ export const qualifi = [
     "FCCP",
     "DTM & H",
 ];
-export const qualifications = ["MBBS", "FCPS"];
 
+
+
+export const articlesData = [
+  {
+    id: 1,
+    img: panel1,
+    title: "How much aspirin to take for stroke",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    date1: "16",
+    date2: "Jan 2022",
+    author: "Kowshik"
+  },
+  {
+    id: 2,
+    img: panel2,
+    title: "Implant Surgical equipment technology",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    date1: "16",
+    date2: "Jan 2022",
+    author: "Alex"
+  },
+  {
+    id: 3,
+    img: panel3,
+    title: "The Benefits of Middle-Age Fitness",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's....",
+    date1: "16",
+    date2: "Jan 2022",
+    author: "Sajid"
+  },
+];

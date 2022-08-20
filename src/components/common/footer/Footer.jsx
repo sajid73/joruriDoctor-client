@@ -4,9 +4,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Link, MenuItem } from "@mui/material";
+import { Link, MenuItem, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
-import Divider from '@mui/material/Divider';
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
@@ -46,23 +47,57 @@ const Footer = () => {
           <InstagramIcon fontSize="large" sx={{ color: "#fb3958" }} />
         </Stack>
       </Stack>
-      <Stack direction={'row'} spacing={5} >
-         <Stack spacing={2}>
-             <MenuItem component={Link}>About</MenuItem>
-             <MenuItem component={Link}>How it Works</MenuItem>
-             <MenuItem component={Link}>Features</MenuItem>
-             <MenuItem component={Link}>Blog</MenuItem>
-             <MenuItem component={Link}>Contact Us</MenuItem>
-         </Stack>
-         <Divider orientation="vertical" color='white' />
-         <Stack spacing={2}>
-             <MenuItem component={Link}>For Doctors</MenuItem>
-             <MenuItem component={Link}>Joruri Doctor For Enterprises</MenuItem>
-             <MenuItem component={Link}>Terms & Conditions</MenuItem>
-             <MenuItem component={Link}>Privacy Policy</MenuItem>
-         </Stack>
+      <Stack direction={"row"} spacing={5}>
+        <Stack spacing={2}>
+          <MenuItem component={Link}>About</MenuItem>
+          <MenuItem component={Link}>How it Works</MenuItem>
+          <MenuItem component={Link}>Features</MenuItem>
+          <MenuItem component={Link}>Blog</MenuItem>
+          <MenuItem component={Link}>Contact Us</MenuItem>
+        </Stack>
+        <Divider orientation="vertical" color="white" />
+        <Stack spacing={2}>
+          <MenuItem component={Link}>For Doctors</MenuItem>
+          <MenuItem component={Link}>Joruri Doctor For Enterprises</MenuItem>
+          <MenuItem component={Link}>Terms & Conditions</MenuItem>
+          <MenuItem component={Link}>Privacy Policy</MenuItem>
+        </Stack>
       </Stack>
-      <Stack>Think</Stack>
+      <Stack direction={"column"} spacing={3}>
+        <Typography variant="h4">Newsletter</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <TextField
+            label="Enter Your Email"
+            variant="outlined"
+            size="small"
+            sx={{
+              borderRadius: 5,
+              "& .MuiInputLabel-root": { color: "white" },
+              "& .MuiFilledInput-input": {
+                border: "1px solid #3DE49A",
+                borderRadius: 5,
+              },
+              input: {
+                color: "#3DE49A",
+                background: "#1C4F5B",
+              },
+            }}
+          />
+          <IconButton
+            sx={{
+              backgroundColor: "#3DE49A",
+              color: "white",
+            }}
+          >
+            <EmailIcon />
+          </IconButton>
+        </Box>
+      </Stack>
     </Box>
   );
 };
