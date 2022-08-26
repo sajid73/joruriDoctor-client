@@ -18,7 +18,6 @@ const PaymentCard = ({ handlePayment }) => {
         });
 
         if (error) {
-            console.log('[error]', error);
             setSubmitStats({ status: 'error', desc: error.message, open: true })
         } else {
             await handlePayment(paymentMethod.id);

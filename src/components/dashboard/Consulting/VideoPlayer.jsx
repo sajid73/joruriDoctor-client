@@ -20,7 +20,7 @@ const VideoPlayer = () => {
         }
         // eslint-disable-next-line
     }, [])
-    console.log(userVideo)
+    // console.log(userVideo)
     return (
         <Grid container>
             {call.name && <Typography variant="h5" gutterBottom>Call from {call.name}</Typography>}<br /><br />

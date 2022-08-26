@@ -101,6 +101,15 @@ export const doctorInfo = async (query) => {
   }
 };
 
+export const updateDoctor = async (id, info) => {
+  try {
+    const res = await axios.patch(`${api}/doctor/${id}`, info);
+    return res;
+  } catch (error) {
+    return error;
+  }
+};
+
 // Patient section
 
 export const patientInfo = async (query) => {

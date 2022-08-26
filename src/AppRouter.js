@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./components/common/NotFound/NotFound";
 import ProfileDetails from "./components/common/Profile/ProfileDetails";
-import ProfileLayout from "./components/common/Profile/ProfileLayout";
 import ScrollToTop from "./components/common/ScrollToTop";
 import AddAdmin from "./components/dashboard/admin/AddAdmin";
 import AddDoc from "./components/dashboard/admin/AddDoc";
@@ -10,10 +9,12 @@ import AppointmentList from "./components/dashboard/Appointment/AppointmentList/
 import AppointmentTime from "./components/dashboard/Appointment/AppointmentTime";
 import StripePay from "./components/dashboard/Appointment/Payment/StripePay";
 import Consulting from "./components/dashboard/Consulting";
+import DoctorApprove from "./components/dashboard/DoctorApprove/DoctorApprove";
 import DoctorList from "./components/dashboard/DoctorList";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import JoinDoctor from "./pages/JoinDoctor";
 import Service from "./pages/Service";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -28,13 +29,14 @@ const AppRouter = () => {
           <Route path="service" element={<Service />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="test" element={<ProfileLayout />} />
+          <Route path="joinAsDoctor" element={<JoinDoctor />} />
           <Route path="*" element={<NotFound />} />
           <Route path="dashboard" element={<Dashboard />}>
             <Route path="profile" index element={<ProfileDetails />} />
             <Route path="doclist" element={<DoctorList />} />
             <Route path="appointmentbook" element={<AppointmentBook />} />
             <Route path="appointments" element={<AppointmentList />} />
+            <Route path="docapprove" element={<DoctorApprove />} />
             <Route path="appointments/pay/:apntid" element={<StripePay />} />
             <Route path="appointmentbook/:docid" element={<AppointmentTime />} />
             <Route path="adddoc" element={<AddDoc />} />

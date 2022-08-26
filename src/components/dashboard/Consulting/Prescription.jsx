@@ -11,13 +11,13 @@ const Prescription = () => {
     const [submitStats, setSubmitStats] = useState({ status: '', desc: "", open: false });
     const { apntid } = useParams();
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         const obj = {
             ...data,
             isDone: true
         }
         const res = await updateAppointment(apntid, obj);
-        console.log(res)
+        // console.log(res)
         if (res?.status === 200) {
             setSubmitStats({ status: 'success', desc: "Appointment done", open: true });
         } else {

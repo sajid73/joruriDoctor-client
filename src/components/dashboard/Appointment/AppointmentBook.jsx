@@ -26,8 +26,6 @@ const AppointmentBook = () => {
     setDoctors(res?.data?.doctors);
     setFiltterDoc(res?.data?.doctors);
   };
-
-  console.log(filterDoc);
   const setDocList = () => {
     const result = doctors?.filter((doc) => {
       return (

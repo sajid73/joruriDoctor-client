@@ -20,7 +20,6 @@ const StripePay = () => {
         const res = await getAppointment(apntid);
         if (res?.status === 200) {
             setAppointment(res?.data?.appointment);
-            console.log(res?.data?.appointment);
         }
     }
     useEffect(() => {

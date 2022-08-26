@@ -36,7 +36,6 @@ const AddDoc = () => {
       fees: data.get("fees"),
       specilities, gender
     };
-    console.log(formData)
     if (formData.password === data.get("retype-password")) {
       await addDoctor(formData);
       setSubmitStats({ status: "success", desc: "Doctor added!", open: true });

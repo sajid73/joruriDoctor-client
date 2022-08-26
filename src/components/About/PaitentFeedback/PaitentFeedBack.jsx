@@ -15,8 +15,6 @@ const PaitentFeedBack = () => {
     setPatients(res?.data?.patients);
   };
 
-  console.log(patients);
-
   useEffect(() => {
     patientData();
   }, []);

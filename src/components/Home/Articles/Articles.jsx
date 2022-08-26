@@ -8,7 +8,6 @@ const Articles = () => {
   const [articles, setArticles] = useState();
   const loadArticles = async () => {
     const res = await blogList();
-    console.log(res?.data?.articles);
     setArticles(res?.data?.articles);
   }
   useEffect(() => {

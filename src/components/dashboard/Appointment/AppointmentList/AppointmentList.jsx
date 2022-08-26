@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { appointmentList } from '../../../../api';
 import { AppContext } from '../../../../states/app.context';
 import PrescriptionModal from './PrescriptionModal';
+import RatingDoc from './RatingDoc';
 
 const appStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#033b4a', color: 'white', margin: '5px 0', padding: '2px 1rem', borderRadius: '15px' }
 
@@ -14,7 +15,6 @@ const AppointmentList = () => {
   const navigate = useNavigate();
   const loadAppointments = async () => {
     const res = await appointmentList({ userId: user._id, role: user.role });
-    console.log(res?.data?.appiontments);
     setAppointments(res?.data?.appiontments);
   }
   useEffect(() => {
@@ -41,7 +41,10 @@ const AppointmentList = () => {
                 <p>Status: <b>{appointment.isDone ? 'Done' : 'Not started'}</b></p>
                 <p>Paid: <b>{appointment.isPaid ? 'Paid' : <Button variant="contained" color="success" onClick={() => navigate(`pay/${appointment._id}`)}>Pay now</Button>}</b></p>
               </CardContent>
-              {appointment.isDone ? <Stack direction='column' gap={'10px'}>{appointment.prescription && <PrescriptionModal title='Prescription' data={appointment.prescription} />}{appointment.exams && <PrescriptionModal title='Exams' data={appointment.exams} />}</Stack> : 'Scheduled'}
+              {appointment.isDone ? <Stack direction='column' gap={'10px'}>
+                {appointment.prescription && <PrescriptionModal title='Prescription' data={appointment.prescription} />}{appointment.exams && <PrescriptionModal title='Tests' data={appointment.exams} />}
+                <RatingDoc docid={appointment.doctorId} rating={appointment.doctorId.rating} />
+              </Stack> : 'Scheduled'}
             </Card>) : (<p>You have no booked appointment</p>)
           }
         </>) : (<div>

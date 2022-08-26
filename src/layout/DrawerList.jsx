@@ -2,6 +2,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import QueueOutlinedIcon from '@mui/icons-material/QueueOutlined';
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
 import VideoCallIcon from "@mui/icons-material/VideoCall";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -48,6 +49,16 @@ const DrawerList = () => {
                         <VideoCallIcon />
                     </ListItemIcon>
                     <ListItemText primary="Book Appointment" />
+                </ListItemButton> : <></>
+            }
+            {
+                user?.role === 'admin' ? <ListItemButton component={NavLink} style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                } to="docapprove">
+                    <ListItemIcon>
+                        <RecentActorsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Pending doctors" />
                 </ListItemButton> : <></>
             }
             <ListItemButton component={NavLink} style={({ isActive }) =>
