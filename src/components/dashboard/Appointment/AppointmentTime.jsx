@@ -19,10 +19,10 @@ const AppointmentTime = () => {
         const appointmentDate = new Date(data.appointmentTime);
         let diff = appointmentDate - new Date();
         if (appointmentDate.getDate() === new Date().getDate()) {
-            diff = 31556924000;
+            diff = 5183989989;
         }
-        if (diff >= 31556926000) {
-            setSubmitStats({ status: 'error', desc: "Can't book before 1 year", open: true });
+        if (diff >= 5184000000) {
+            setSubmitStats({ status: 'error', desc: "Can't book an appointment before 60 days", open: true });
             return;
         }
         if (diff < 0) {

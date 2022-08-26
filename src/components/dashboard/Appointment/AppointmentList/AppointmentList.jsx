@@ -20,6 +20,9 @@ const AppointmentList = () => {
   useEffect(() => {
     if (user) {
       loadAppointments();
+      setInterval(function () {
+        loadAppointments()
+      }, 6000)
     }
     // eslint-disable-next-line
   }, [user])
