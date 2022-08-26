@@ -5,16 +5,17 @@ import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Grid from "@mui/material/Grid";
 import Snackbar from "@mui/material/Snackbar";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { Stack } from "@mui/system";
 import { useContext, useEffect, useState } from "react";
 import LoadingScreen from "react-loading-screen";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { saveProfile, signInUser } from "../api";
 import { AppContext } from "../states/app.context";
-import logo from './../assets/images/joruriDoctor02.png';
+import logo from "./../assets/images/joruriDoctor02.png";
+import signIn from "./../assets/svg/Mobile login-bro.svg";
 
 const SignIn = () => {
   const { setUser } = useContext(AppContext);
@@ -49,14 +50,16 @@ const SignIn = () => {
   }, []);
   return (
     <>
-      {
-        loading ? <LoadingScreen
+      {loading ? (
+        <LoadingScreen
           loading={true}
           bgColor="#f1f1f1"
           spinnerColor="#9ee5f8"
           textColor="#676767"
           logoSrc={logo}
-        /> : (<Box
+        />
+      ) : (
+        <Container
           sx={{
             display: "flex",
             justifyContent: "space-evenly",
@@ -66,12 +69,8 @@ const SignIn = () => {
             },
           }}
         >
-          <Box sx={{ width: { xs: "100%", md: "40%" }, padding: "2rem" }}>
-            <img
-              width="100%"
-              src={require("../assets/images/Computer login-rafiki.png")}
-              alt="Signin"
-            />
+          <Box sx={{ width: { xs: "100%", md: "50%" }, padding: "2rem" }}>
+            <img width="100%" src={signIn} alt="Signin" />
           </Box>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -83,7 +82,11 @@ const SignIn = () => {
                 alignItems: "center",
               }}
             >
-              <Typography component="h1" variant="h3" sx={{ fontWeight: "medium" }}>
+              <Typography
+                component="h1"
+                variant="h3"
+                sx={{ fontWeight: 700, color: "#00D6A3"}}
+              >
                 Sign in
               </Typography>
               <Box
@@ -120,22 +123,47 @@ const SignIn = () => {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{
+                    mt: 3,
+                    mb: 2,
+                    fontSize: "16px",
+                    alignItems: "center",
+                    backgroundColor: "#00D6A3",
+                    color: "black",
+                    "&:hover": {
+                      backgroundColor: "#033B4A",
+                      color: "white",
+                    },
+                  }}
                 >
                   Sign In
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link to="#" variant="body2">
-                      Forgot password?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link to="/signup" variant="body2">
-                      {"Don't have an account? Sign Up"}
-                    </Link>
-                  </Grid>
-                </Grid>
+                <Stack direction={"column"} spacing={3}>
+                  <Typography
+                    component={Link}
+                    to="#"
+                    variant="body1"
+                    sx={{
+                      "&:hover": {
+                        color: "#00D6A3",
+                      },
+                    }}
+                  >
+                    Forgot password?
+                  </Typography>
+                  <Typography
+                    component={Link}
+                    to="/signup"
+                    variant="body1"
+                    sx={{
+                      "&:hover": {
+                        color: "#00D6A3",
+                      },
+                    }}
+                  >
+                    {"Don't have an account? Sign Up"}
+                  </Typography>
+                </Stack>
               </Box>
             </Box>
           </Container>
@@ -147,15 +175,15 @@ const SignIn = () => {
             <Alert
               onClose={() => setOpen(false)}
               severity="error"
-              sx={{ width: "100%", fontWeight: 'bolder' }}
+              sx={{ width: "100%", fontWeight: "bolder" }}
               elevation={6}
               variant="filled"
             >
               Failed to login! Check email and password
             </Alert>
           </Snackbar>
-        </Box>)
-      }
+        </Container>
+      )}
     </>
   );
 };

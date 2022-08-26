@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { saveProfile, signUpUser } from "../api";
 import { AppContext } from "../states/app.context";
+import signUp from "./../assets/svg/Mobile login-pana.svg";
 
 const SignUp = () => {
   const { setUser } = useContext(AppContext);
@@ -36,7 +37,7 @@ const SignUp = () => {
     document.title = "Sign Up - Joruri Doctor";
   }, []);
   return (
-    <Box
+    <Container
       sx={{
         display: "flex",
         justifyContent: "space-evenly",
@@ -46,12 +47,8 @@ const SignUp = () => {
         },
       }}
     >
-      <Box sx={{ width: { xs: "100%", md: "40%" }, padding: "2rem" }}>
-        <img
-          width="100%"
-          src={require("../assets/images/Sign up-amico.png")}
-          alt="sign up"
-        />
+      <Box sx={{ width: { xs: "100%", md: "50%" }, padding: "2rem" }}>
+        <img width="100%" src={signUp} alt="sign up" />
       </Box>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -63,7 +60,11 @@ const SignUp = () => {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h3" sx={{ fontWeight: "medium" }}>
+          <Typography
+            component="h1"
+            variant="h3"
+            sx={{ fontWeight: 700, color: "#00D6A3" }}
+          >
             Sign up
           </Typography>
           <Box
@@ -120,19 +121,41 @@ const SignUp = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                fontSize: "16px",
+                alignItems: "center",
+                backgroundColor: "#00D6A3",
+                color: "black",
+                "&:hover": {
+                  backgroundColor: "#033B4A",
+                  color: "white",
+                },
+              }}
             >
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/signin">Already have an account? Sign in</Link>
+                <Typography
+                  component={Link}
+                  to="/signin"
+                  variant="body1"
+                  sx={{
+                    "&:hover": {
+                      color: "#00D6A3",
+                    },
+                  }}
+                >
+                  Already have an account? Sign in
+                </Typography>
               </Grid>
             </Grid>
           </Box>
         </Box>
       </Container>
-    </Box>
+    </Container>
   );
 };
 
