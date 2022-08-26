@@ -70,7 +70,7 @@ export const updateProfile = async (info) => {
 export const saveProfile = async (user) => {
   const info = JSON.stringify(user);
   localStorage.setItem("user", info);
-}
+};
 
 // Doctor section
 
@@ -162,13 +162,17 @@ export const appointmentList = async (query) => {
 export const blogList = async (query) => {
   try {
     const d = new Date();
-    let url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${d.getMonth() + 1
-      }-${d.getDate()}&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
+    let url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
+      d.getMonth() + 1
+    }-${d.getDate()}&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
     // console.log(url)
     let res = await axios.get(url);
     if (res.data.totalResults === 0) {
-      url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${d.getMonth() + 1
-        }-${d.getDate() - 1}&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
+      url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
+        d.getMonth() + 1
+      }-${
+        d.getDate() - 1
+      }&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
       res = await axios.get(url);
       return res;
     }

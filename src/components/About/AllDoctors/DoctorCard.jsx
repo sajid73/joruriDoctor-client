@@ -52,12 +52,12 @@ const DoctorCard = (props) => {
             <Typography>Rating</Typography>
             <Rating
               name="half-rating-read"
-              defaultValue={rating ? (rating * 5) / 100 : 4.5}
+              defaultValue={rating ? rating  : 4.5}
               precision={0.5}
               readOnly
             />
             <Typography variant="h6">
-              {rating ? (rating * 5) / 100 : 4.5}
+              {rating ? rating : 4.5}
             </Typography>
           </Stack>
         </Stack>

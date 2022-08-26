@@ -39,7 +39,7 @@ const Footer = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: {md: "column", lg: "row", sm: "column" },
         justifyContent: "space-between",
         px: 10,
         py: 5,

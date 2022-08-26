@@ -307,12 +307,12 @@ const ProfileDetails = () => {
                             fontSize: 30,
                           }}
                         >
-                          {user?.rating || 75}%
+                          {user?.rating*20 || 75}%
                         </Box>
                         <CircularProgress
                           color="inherit"
                           variant="determinate"
-                          value={user?.rating || 75}
+                          value={user?.rating*20 || 75}
                           thickness={7.5}
                           size={200}
                         />
