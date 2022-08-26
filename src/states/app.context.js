@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import Peer from 'simple-peer';
 import { io } from 'socket.io-client';
-import { myProfile, updateProfile } from "../api";
+import { myProfile, saveProfile, updateProfile } from "../api";
 
 // const socket = io("http://localhost:5005");
 const socket = io("https://glacial-ravine-76078.herokuapp.com");
@@ -24,10 +24,16 @@ export const AppContextProvider = ({ children }) => {
 
   const loadUserData = async () => {
     socket.on('me', (id) => setMe(id));
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const data = await JSON.parse(userData);
+      setUser(data);
+    }
     const token = localStorage.getItem("token");
     if (token) {
       const res = await myProfile(token);
       setUser(res.data);
+      await saveProfile(res.data);
       setName(res.data.name);
     }
   };
@@ -64,7 +70,7 @@ export const AppContextProvider = ({ children }) => {
     socket.on('callAccepted', (signal) => {
       setCallAccepted(true);
 
-    peer.signal(signal);
+      peer.signal(signal);
     });
 
     connectionRef.current = peer;
@@ -93,8 +99,6 @@ export const AppContextProvider = ({ children }) => {
 
   const loadSocket = async () => {
     if (user?.role === 'patient' && me !== '') {
-      console.log('role', user.role);
-      console.log('socket', me);
       await updateProfile({ socketId: me });
     }
     socket.on('callUser', ({ from, name: callerName, signal }) => {

@@ -2,31 +2,45 @@ import { Button, Input, LinearProgress, Stack, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { createAppointment, doctorInfo } from '../../../api';
 import { AppContext } from '../../../states/app.context';
 import ShowResult from '../../common/others/ShowResult';
 
 const AppointmentTime = () => {
     const { user } = useContext(AppContext);
+    const navigate = useNavigate();
     const [doc, setDoc] = useState();
     const { control, handleSubmit } = useForm();
     const [submitStats, setSubmitStats] = useState({ status: '', desc: "", open: false });
     let { docid } = useParams();
 
     const onSubmit = async (data) => {
-        if ((new Date(data.appointmentTime) - new Date()) <= 0) {
+        const appointmentDate = new Date(data.appointmentTime);
+        let diff = appointmentDate - new Date();
+        if (appointmentDate.getDate() === new Date().getDate()) {
+            diff = 31556924000;
+        }
+        if (diff >= 31556926000) {
+            setSubmitStats({ status: 'error', desc: "Can't book before 1 year", open: true });
+            return;
+        }
+        if (diff < 0) {
             setSubmitStats({ status: 'error', desc: "Can't select past date or today", open: true });
+            return;
+        }
+        if (data.problem.length <= 0) {
+            setSubmitStats({ status: 'error', desc: "Please describe your problem", open: true });
             return;
         }
         data = { ...data, doctorId: docid, patientId: user._id };
         const res = await createAppointment(data);
         if (res?.status === 201) {
             setSubmitStats({ status: 'success', desc: "Appointment booked", open: true });
+            navigate('/dashboard/appointments');
         } else {
             setSubmitStats({ status: 'error', desc: "Something went wrong on booking", open: true });
         }
-        console.log(res)
     }
 
     const loadInfo = async () => {

@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { signUpUser } from "../api";
+import { saveProfile, signUpUser } from "../api";
 import { AppContext } from "../states/app.context";
 
 const SignUp = () => {
@@ -27,6 +27,7 @@ const SignUp = () => {
     const res = await signUpUser(obj);
     if (res.status === 201) {
       setUser(res.data);
+      await saveProfile(res.data);
       navigate(from);
     }
   };
