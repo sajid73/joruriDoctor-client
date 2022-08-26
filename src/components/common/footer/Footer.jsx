@@ -1,16 +1,13 @@
 import EmailIcon from "@mui/icons-material/Email";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Alert, Link, MenuItem, Snackbar, TextField } from "@mui/material";
+import { Alert, MenuItem, Snackbar, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [email, setEmail] = useState('')
@@ -52,41 +49,41 @@ const Footer = () => {
       }}
     >
       <Stack direction={"column"} spacing={4}>
-        <img
+        <Link to="/"><img
           src={require("../../../assets/images/joruriDoctor02.png")}
           alt="logo"
           width={240}
           height={70}
-        />
+        /></Link>
         <Stack direction={"row"} spacing={2}>
           <PhoneIcon fontSize="large" sx={{ color: "#00D6A3" }} />
-          <Typography variant="h6">09725663356</Typography>
+          <Typography variant="h6"><a href="tel:+09725663356">09725663356</a></Typography>
         </Stack>
         <Stack direction={"row"} spacing={2}>
           <EmailIcon fontSize="large" sx={{ color: "#00D6A3" }} />
-          <Typography variant="h6">support@jururidoctor.com.bd</Typography>
+          <Typography variant="h6"><a href="mailto:support@jururidoctor.com.bd">support@jururidoctor.com.bd</a></Typography>
         </Stack>
-        <Stack direction={"row"} spacing={3}>
+        {/* <Stack direction={"row"} spacing={3}>
           <FacebookIcon fontSize="large" sx={{ color: "#4267B2" }} />
           <TwitterIcon fontSize="large" sx={{ color: "#1DA1F2" }} />
           <YouTubeIcon fontSize="large" sx={{ color: "#FF0000" }} />
           <InstagramIcon fontSize="large" sx={{ color: "#fb3958" }} />
-        </Stack>
+        </Stack> */}
       </Stack>
       <Stack direction={"row"} spacing={5}>
         <Stack spacing={2}>
-          <MenuItem component={Link}>About</MenuItem>
-          <MenuItem component={Link}>How it Works</MenuItem>
-          <MenuItem component={Link}>Features</MenuItem>
-          <MenuItem component={Link}>Blog</MenuItem>
-          <MenuItem component={Link}>Contact Us</MenuItem>
+          <MenuItem component={Link} to="/about">About</MenuItem>
+          <MenuItem component={Link} to="/about">How it Works</MenuItem>
+          <MenuItem component={Link} to="/">Features</MenuItem>
+          {/* <MenuItem component={Link}>Blog</MenuItem> */}
+          {/* <MenuItem component={Link}>Contact Us</MenuItem> */}
         </Stack>
         <Divider orientation="vertical" color="white" />
         <Stack spacing={2}>
-          <MenuItem component={Link}>For Doctors</MenuItem>
-          <MenuItem component={Link}>Joruri Doctor For Enterprises</MenuItem>
-          <MenuItem component={Link}>Terms & Conditions</MenuItem>
-          <MenuItem component={Link}>Privacy Policy</MenuItem>
+          <MenuItem component={Link} to="/service">For Doctors</MenuItem>
+          <MenuItem component={Link} to="/about">Joruri Doctor For Enterprises</MenuItem>
+          <MenuItem component={Link} to="/about">Terms & Conditions</MenuItem>
+          <MenuItem component={Link} to="/about">Privacy Policy</MenuItem>
         </Stack>
       </Stack>
       <Stack direction={"column"} spacing={3}>

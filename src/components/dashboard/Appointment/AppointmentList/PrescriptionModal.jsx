@@ -18,11 +18,11 @@ const style = {
     p: 4,
 };
 
-const PrescriptionModal = ({ appointment }) => {
+const PrescriptionModal = ({ title, data }) => {
     const [open, setOpen] = React.useState(false)
 
     return (
-        <><Button variant="contained" color="success" onClick={() => setOpen(true)}>Prescription</Button>
+        <><Button variant="contained" color="success" onClick={() => setOpen(true)}>{title}</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -37,19 +37,11 @@ const PrescriptionModal = ({ appointment }) => {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography textAlign={'center'} id="transition-modal-title" variant="h6" component="h2">
-                            Prescription
+                            {title}
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            <pre>{appointment.prescription}</pre>
+                            <pre>{data}</pre>
                         </Typography>
-                        {
-                            appointment?.exams && (<><Typography textAlign={'center'} id="transition-modal-title" variant="h6" component="h2">
-                                Exams
-                            </Typography>
-                                <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                    <pre>{appointment.exams}</pre>
-                                </Typography></>)
-                        }
                     </Box>
                 </Fade>
             </Modal></>

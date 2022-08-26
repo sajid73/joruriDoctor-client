@@ -29,7 +29,6 @@ const SingleArticle = ({ data }) => {
     setExpanded(!expanded);
   };
   const d = new Date(data.publishedAt);
-  console.log(data);
 
   return (
     <Card sx={{ maxWidth: 345, borderRadius: 3, minHeight: 600 }}>

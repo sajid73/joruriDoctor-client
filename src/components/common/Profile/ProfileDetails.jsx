@@ -24,7 +24,7 @@ import {
 import axios from "axios";
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { updateProfile } from "../../../api";
+import { saveProfile, updateProfile } from "../../../api";
 import { AppContext } from "../../../states/app.context";
 import { speci } from "../../DemoData/HomeData";
 import ShowResult from "../others/ShowResult";
@@ -46,6 +46,7 @@ const ProfileDetails = () => {
     const res = await updateProfile(data);
     if (res.status === 201) {
       setUser(res.data);
+      await saveProfile(res.data);
       setSubmitStats({ status: "success", desc: "Profile updated!", open: true });
     } else {
       setSubmitStats({ status: "error", desc: "Failed to update!", open: true });
