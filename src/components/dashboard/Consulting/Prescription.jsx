@@ -71,8 +71,11 @@ const Prescription = () => {
         <p>
           <b>Problem:</b> {prescription.problem}
         </p>
-        <Typography variant="h5" color="white">
+        <Typography variant="h4" color="white">
           Prescribe Section
+        </Typography>
+        <Typography variant="h6" fontWeight={'regular'} color="white">
+          Prescription
         </Typography>
         <Controller
           name="prescription"
@@ -94,6 +97,9 @@ const Prescription = () => {
           )}
         />{" "}
         <br />
+        <Typography variant="h6" fontWeight={'regular'} color="white">
+          Tests
+        </Typography>
         <Controller
           name="exams"
           control={control}

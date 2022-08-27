@@ -1,3 +1,4 @@
+import AddCommentIcon from '@mui/icons-material/AddComment';
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -52,14 +53,14 @@ const DrawerList = () => {
                 </ListItemButton> : <></>
             }
             {
-                user?.role === 'admin' ? <ListItemButton component={NavLink} style={({ isActive }) =>
+                user?.role === 'admin' ? (<ListItemButton component={NavLink} style={({ isActive }) =>
                     isActive ? activeStyle : undefined
                 } to="docapprove">
                     <ListItemIcon>
                         <RecentActorsIcon />
                     </ListItemIcon>
                     <ListItemText primary="Pending doctors" />
-                </ListItemButton> : <></>
+                </ListItemButton>) : <></>
             }
             <ListItemButton component={NavLink} style={({ isActive }) =>
                 isActive ? activeStyle : undefined
@@ -69,6 +70,16 @@ const DrawerList = () => {
                 </ListItemIcon>
                 <ListItemText primary="Appointment list" />
             </ListItemButton>
+            {
+                user?.role === 'patient' ? (<ListItemButton component={NavLink} style={({ isActive }) =>
+                    isActive ? activeStyle : undefined
+                } to="feedback">
+                    <ListItemIcon>
+                        <AddCommentIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Feedback" />
+                </ListItemButton>) : <></>
+            }
             {/* <ListItemButton component={NavLink} style={({ isActive }) =>
       isActive ? activeStyle : undefined
     } to="addadmin">

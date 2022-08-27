@@ -62,7 +62,7 @@ const DoctorCard = (props) => {
           </Stack>
         </Stack>
         <Stack direction={'row'} justifyContent='space-between'>
-          <Typography variant="h6"><span style={{ fontWeight: 'bold' }}>{fees}৳</span> per conssulation</Typography>
+          <Typography variant="h6"><span style={{ fontWeight: 'bold' }}>{fees}$</span> per conssulation</Typography>
           <IconButton size='large' sx={{backgroundColor: '#01D6A3'}} onClick={() => navigate(`/dashboard/appointmentbook/${props.doc._id}`)}><ArrowForwardIosIcon /></IconButton>
         </Stack>
       </CardContent>

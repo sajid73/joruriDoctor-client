@@ -11,6 +11,7 @@ import StripePay from "./components/dashboard/Appointment/Payment/StripePay";
 import Consulting from "./components/dashboard/Consulting";
 import DoctorApprove from "./components/dashboard/DoctorApprove/DoctorApprove";
 import DoctorList from "./components/dashboard/DoctorList";
+import UserFeedback from "./components/dashboard/UserFeedback";
 import Dashboard from "./layout/Dashboard";
 import About from "./pages/About";
 import Home from "./pages/Home";
@@ -43,6 +44,7 @@ const AppRouter = () => {
             <Route path="video" element={<Consulting />} />
             <Route path="video/:apntid" element={<Consulting />} />
             <Route path="addadmin" element={<AddAdmin />} />
+            <Route path="feedback" element={<UserFeedback />} />
           </Route>
         </Routes>
       </ScrollToTop>
