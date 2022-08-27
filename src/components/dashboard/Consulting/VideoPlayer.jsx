@@ -41,25 +41,26 @@ const VideoPlayer = () => {
       )}
       <br />
       <br />
-      <Paper sx={{ p: "10px", border: "2px solid black",}}>
+      <Paper sx={{ p: "10px", border: "2px solid black", }}>
         <Box
           item
           xs={12}
           md={6}
-          style={{ padding: "1rem", position: "relative", width: 620 }}
+          style={{ padding: "1rem", position: "relative", maxWidth: 620 }}
         >
           {userVideo ? (
             <video
               playsInline
               ref={userVideo}
               autoPlay
-              style={{ width: 700 }}
+              width={550}
             />
           ) : (
             "No call"
           )}
           <video
             ref={myVideo}
+            width={300}
             style={{
               position: "absolute",
               width: 300,

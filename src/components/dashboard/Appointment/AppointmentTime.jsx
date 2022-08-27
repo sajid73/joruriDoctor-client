@@ -1,4 +1,4 @@
-import { Button, Input, LinearProgress, Stack, TextField } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, FormGroup, Input, LinearProgress, Stack, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,7 +11,7 @@ const AppointmentTime = () => {
     const { user } = useContext(AppContext);
     const navigate = useNavigate();
     const [doc, setDoc] = useState();
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit, watch } = useForm();
     const [submitStats, setSubmitStats] = useState({ status: '', desc: "", open: false });
     let { docid } = useParams();
 
@@ -34,6 +34,7 @@ const AppointmentTime = () => {
             return;
         }
         data = { ...data, doctorId: docid, patientId: user._id };
+        console.log(data);
         const res = await createAppointment(data);
         if (res?.status === 201) {
             setSubmitStats({ status: 'success', desc: "Appointment booked", open: true });
@@ -56,21 +57,26 @@ const AppointmentTime = () => {
         {
             doc ? <div>
                 <h1>Select appointment time for <em style={{ color: "#00D6A3" }}>{doc.userId.name}</em></h1>
-                <Box
-                    component="form"
-                    noValidate
-                    onSubmit={handleSubmit(onSubmit)}>
-                    <Stack direction={"column"} alignItems="center" spacing={2}>
-                        <label htmlFor="appointment">Date of appointment: </label>
-                        <Controller name="appointmentTime" control={control} render={({ field }) => (<Input {...field} type="date" id="appointment" name="appointment" />)} /> <br />
-                        <Controller name="problem" control={control} render={({ field }) => (
-                            <TextField multiline rows={3} sx={{ width: '40%' }} {...field} placeholder="Define problem" />
-                        )} /> <br />
-                        <Button type="submit" variant="contained" sx={{ mt: '10px' }}>
-                            Book
-                        </Button>
-                    </Stack>
-                </Box >
+                <FormGroup>
+                    <Box
+                        component="form"
+                        noValidate
+                        onSubmit={handleSubmit(onSubmit)}>
+                        <Stack direction={"column"} alignItems="center" spacing={2}>
+                            <label htmlFor="appointment">Date of appointment: </label>
+                            <Controller name="appointmentTime" control={control} render={({ field }) => (<Input disabled={watch("isEmergency")} {...field} type="date" id="appointment" name="appointment" />)} /> <br />
+                            <Controller name="isEmergency" control={control} render={({ field }) => (
+                                <FormControlLabel control={<Checkbox {...field} id="isEmergency" name="isEmergency" defaultChecked={false} />} label="Emmergency" />)} /> <br />
+                            {/* <Controller name="isEmergency" control={control} render={({ field }) => (<Checkbox {...field} id="isEmergency" name="isEmergency" defaultChecked={false} />)} /> Emergency <br /> */}
+                            <Controller name="problem" control={control} render={({ field }) => (
+                                <TextField multiline rows={3} sx={{ width: '40%' }} {...field} placeholder="Define problem" />
+                            )} /> <br />
+                            <Button type="submit" variant="contained" sx={{ mt: '10px' }}>
+                                Book
+                            </Button>
+                        </Stack>
+                    </Box >
+                </FormGroup>
             </div> : <LinearProgress />
         }
         <ShowResult submitStats={submitStats} setSubmitStats={setSubmitStats} />

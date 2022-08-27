@@ -1,5 +1,5 @@
 import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
-import { Button, Card, CardContent, Stack } from "@mui/material";
+import { Button, Card, CardContent, Chip, Stack } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { appointmentList } from "../../../../api";
@@ -21,10 +21,18 @@ const appStyle = {
 const AppointmentList = () => {
   const { user } = useContext(AppContext);
   const [appointments, setAppointments] = useState();
+  const [emergency, setEmergency] = useState();
   const navigate = useNavigate();
   const loadAppointments = async () => {
     const res = await appointmentList({ userId: user._id, role: user.role });
-    setAppointments(res?.data?.appiontments);
+    console.log(res?.data?.appiontments)
+    // eslint-disable-next-line
+    const emergencyList = res?.data?.appiontments.filter(apt => { if (apt.isEmergency) return true });
+    console.log(emergencyList);
+    setEmergency(emergencyList)
+    // eslint-disable-next-line
+    const apntmntList = res?.data?.appiontments.filter(apt => { if (!apt.isEmergency) return true });
+    setAppointments(apntmntList);
   };
   useEffect(() => {
     if (user) {
@@ -43,6 +51,64 @@ const AppointmentList = () => {
           <h1 style={{ textAlign: "center", fontWeight: "bold" }}>
             My Appointments
           </h1>
+          {emergency?.length !== 0 ? (
+            emergency?.map((appointment) => (
+              <Card key={appointment._id} style={appStyle}>
+                <CardContent>
+                  <p>
+                    Doctor: <em>{appointment.doctorId.userId.name}</em>
+                  </p>
+                  <p>
+                    Service hours: <em>{appointment.doctorId.service_hours}</em>
+                  </p>
+                  <p>Date: {'Emergency'}</p>
+                  <p>
+                    Status: <b>{appointment.isDone ? "Done" : "Not started"}</b>
+                  </p>
+                  <p>
+                    Paid:{" "}
+                    <b>
+                      {appointment.isPaid ? (
+                        "Paid"
+                      ) : (
+                        <Button
+                          variant="contained"
+                          color="success"
+                          onClick={() => navigate(`pay/${appointment._id}`)}
+                        >
+                          Pay now
+                        </Button>
+                      )}
+                    </b>
+                  </p>
+                </CardContent>
+                {appointment.isDone ? (
+                  <Stack direction="column" gap={"10px"}>
+                    {appointment.prescription && (
+                      <PrescriptionModal
+                        title="Prescription"
+                        data={appointment.prescription}
+                      />
+                    )}
+                    {appointment.exams && (
+                      <PrescriptionModal
+                        title="Tests"
+                        data={appointment.exams}
+                      />
+                    )}
+                    <RatingDoc
+                      docid={appointment.doctorId}
+                      rating={appointment.doctorId.rating}
+                    />
+                  </Stack>
+                ) : (
+                  "Scheduled"
+                )}
+              </Card>
+            ))
+          ) : (
+            <p>You have no booked appointment</p>
+          )}
           {appointments?.length !== 0 ? (
             appointments?.map((appointment) => (
               <Card key={appointment._id} style={appStyle}>
@@ -105,6 +171,40 @@ const AppointmentList = () => {
       ) : (
         <div>
           <h1>Your today's appointments:</h1>
+          {emergency?.length !== 0 ? (
+            emergency?.map((appointment) => (
+              <div key={appointment._id} style={appStyle}>
+                <div>
+                  <p>
+                    <b>Patient:</b> {appointment?.patientId.userId.name}
+                  </p>
+                  <p>
+                    <b>Priority:</b> <Chip label="Emergency" color="error" />
+                  </p>
+                  <p>
+                    <b>Status:</b> {appointment.isDone ? "Done" : "Not started"}
+                  </p>
+                </div>
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => {
+                    localStorage.setItem(
+                      "patientSocketId",
+                      appointment.patientId.socketId
+                    );
+                  }}
+                  component={Link}
+                  to={`/dashboard/video/${appointment._id}`}
+                  sx={{ height: "fit-content" }}
+                >
+                  <VideoCameraFrontIcon sx={{ mr: 1 }} /> Call
+                </Button>
+              </div>
+            ))
+          ) : (
+            <p>No appointments</p>
+          )}
           {appointments?.length !== 0 ? (
             appointments?.map((appointment) => (
               <div key={appointment._id} style={appStyle}>
