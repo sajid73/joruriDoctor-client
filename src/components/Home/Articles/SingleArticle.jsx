@@ -23,19 +23,20 @@ const ExpandMore = styled((props) => {
 }));
 
 const SingleArticle = ({ data }) => {
+  console.log(data)
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const d = new Date(data.publishedAt);
+  const d = new Date(data.date);
 
   return (
     <Card sx={{ maxWidth: 345, borderRadius: 3, minHeight: 600 }}>
       <CardMedia
         component="img"
         height="284"
-        image={data.urlToImage}
+        image={data?.image?.src}
         alt="Article_Pic"
       />
       <CardHeader title={data.title.length <= 60 ? data.title : `${data.title.slice(0,60)} ...`} sx={{mt: 5}} />

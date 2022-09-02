@@ -161,22 +161,29 @@ export const appointmentList = async (query) => {
 
 export const blogList = async (query) => {
   try {
-    const d = new Date();
-    let url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
-      d.getMonth() + 1
-    }-${d.getDate()}&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
-    // console.log(url)
-    let res = await axios.get(url);
-    if (res.data.totalResults === 0) {
-      url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
-        d.getMonth() + 1
-      }-${
-        d.getDate() - 1
-      }&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
-      res = await axios.get(url);
-      return res;
+    //   const d = new Date();
+    //   let url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
+    //     d.getMonth() + 1
+    //   }-${d.getDate()}&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
+    //   // console.log(url)
+    //   let res = await axios.get(url);
+    //   if (res.data.totalResults === 0) {
+    //     url = `https://newsapi.org/v2/everything?q=Healthcare&from=${d.getFullYear()}-${
+    //       d.getMonth() + 1
+    //     }-${
+    //       d.getDate() - 1
+    //     }&page=1&pageSize=3&sortBy=relevancy&apiKey=103827d534c644379f1802564ec4c2b1`;
+    //     res = await axios.get(url);
+
+    //   return res;
+    // }
+    const headers = {
+      'X-RapidAPI-Key': 'e96b3332b1msh73a82fc1cb18844p14a249jsna992d1e0e6e7',
+      'X-RapidAPI-Host': 'heath-news.p.rapidapi.com'
     }
-    return res;
+    const res = await axios.get('https://heath-news.p.rapidapi.com/news', { headers })
+    // console.log(res)
+    return res?.data.slice(0,3);
   } catch (error) {
     return error;
   }

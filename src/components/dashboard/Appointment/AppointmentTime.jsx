@@ -66,7 +66,7 @@ const AppointmentTime = () => {
                             <label htmlFor="appointment">Date of appointment: </label>
                             <Controller name="appointmentTime" control={control} render={({ field }) => (<Input disabled={watch("isEmergency")} {...field} type="date" id="appointment" name="appointment" />)} /> <br />
                             <Controller name="isEmergency" control={control} render={({ field }) => (
-                                <FormControlLabel control={<Checkbox {...field} id="isEmergency" name="isEmergency" defaultChecked={false} />} label="Emmergency" />)} /> <br />
+                                <FormControlLabel control={<Checkbox {...field} id="isEmergency" name="isEmergency" defaultChecked={false} />} label="Emergency" />)} /> <br />
                             {/* <Controller name="isEmergency" control={control} render={({ field }) => (<Checkbox {...field} id="isEmergency" name="isEmergency" defaultChecked={false} />)} /> Emergency <br /> */}
                             <Controller name="problem" control={control} render={({ field }) => (
                                 <TextField multiline rows={3} sx={{ width: '40%' }} {...field} placeholder="Define problem" />
