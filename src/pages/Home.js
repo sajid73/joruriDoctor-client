@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Articles from "../components/Home/Articles/Articles";
 import HomeCarousel from "../components/Home/Carousel/HomeCarousel";
 import DoctorJoin from "../components/Home/DoctorJoin/DoctorJoin";
 import Intro from "../components/Home/Introduction/Intro";
@@ -17,7 +16,7 @@ const Home = () => {
       <Services />
       <Intro />
       <Steps />
-      <Articles />
+      {/* <Articles /> */}
       <DoctorJoin />
     </div>
   );
