@@ -9,10 +9,10 @@ import DashDrawer from "./DashDrawer";
 const mdTheme = createTheme();
 
 const Dashboard = () => {
-  const { user,getUserMedia } = useContext(AppContext);
+  const { user } = useContext(AppContext);
   const navigate = useNavigate();
   useEffect(() => {
-    getUserMedia();
+    // getUserMedia();
     if (!localStorage.getItem("token")) {
       navigate("/signin");
     }

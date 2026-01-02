@@ -1,4 +1,4 @@
-import { PhoneDisabled } from "@material-ui/icons";
+import { PhoneDisabled } from "@mui/icons-material";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { AppContext } from "../../../states/app.context";

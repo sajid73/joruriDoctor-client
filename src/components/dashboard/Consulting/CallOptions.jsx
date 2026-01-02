@@ -1,4 +1,4 @@
-import { Phone, PhoneDisabled } from "@material-ui/icons";
+import { Phone, PhoneDisabled } from "@mui/icons-material";
 import {
     Button,
     Container,

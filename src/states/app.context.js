@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import { myProfile, saveProfile, updateProfile } from "../api";
 
 // const socket = io("http://localhost:5005");
-const socket = io("https://glacial-ravine-76078.herokuapp.com");
+const socket = io(process.env.REACT_APP_SOCKET_API);
 
 export const AppContext = createContext({});
 

@@ -42,7 +42,7 @@ const OurDoctors = () => {
           columns={{ xs: 1, sm: 8, md: 12 }}
         >
           {doctors?.map((doc) => (
-            <Grid item={true} xs={2} sm={4} md={4}>
+            <Grid key={doc._id} item={true} xs={2} sm={4} md={4} lg={6}>
               <DoctorCard key={doc._id} doc={doc} />
             </Grid>
           ))}
